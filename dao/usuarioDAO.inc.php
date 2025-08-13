@@ -95,7 +95,8 @@ class UsuarioDAO
                 cpf_cnpj_deletado = cpf_cnpj,
                 email = null,
                 cpf_cnpj = null 
-            WHERE id = :id");
+            WHERE id = :id"
+        );
 
         $sql->bindValue(":id", $id);
         $sql->execute();

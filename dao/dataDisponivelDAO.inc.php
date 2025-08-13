@@ -10,22 +10,25 @@ final class DataDisponivelDAO
     private GenericDAO $decorator;
     private string $nomeDatabase = "datas_disponiveis";
 
-    public function __construct() {
+    public function __construct()
+    {
         $c = new Conexao();
 
         $this->conn = $c->getConexao();
         $this->decorator = new GenericDAO($this->conn, $this->nomeDatabase);
     }
 
-    public function insert(DataDisponivel $dtDisponivel) {
+    public function insert(DataDisponivel $dtDisponivel)
+    {
         $this->decorator->insert([
-            "id_servico" => $dtDisponivel->idServico, 
-            "data" => parseISO($dtDisponivel->data), 
+            "id_servico" => $dtDisponivel->idServico,
+            "data" => parseISO($dtDisponivel->data),
             "disponivel" => $dtDisponivel->disponivel
         ]);
     }
 
-    public function findByIdServico(int $idServico) : array {
+    public function findByIdServico(int $idServico): array
+    {
         $sql = $this->conn->prepare(
             "
                 SELECT * 
@@ -43,7 +46,8 @@ final class DataDisponivelDAO
         return DataDisponivelDAO::assocsToDatasDisponiveis($r);
     }
 
-    public function findAllContratadasByIdServico(int $idServico, int $idContratante) : array {
+    public function findAllContratadasByIdServico(int $idServico, int $idContratante): array
+    {
         $sql = $this->conn->prepare(
             "
                 SELECT 
@@ -72,7 +76,8 @@ final class DataDisponivelDAO
         return DataDisponivelDAO::assocsToDatasDisponiveis($r);
     }
 
-    public function findAllByIdServicoIdVenda(int $idServico, int $idVenda) : array {
+    public function findAllByIdServicoIdVenda(int $idServico, int $idVenda): array
+    {
         $sql = $this->conn->prepare(
             "
                 SELECT 
@@ -101,7 +106,8 @@ final class DataDisponivelDAO
         return DataDisponivelDAO::assocsToDatasDisponiveis($r);
     }
 
-    public function findByIdServicoParaVenda(int $idServico) : array {
+    public function findByIdServicoParaVenda(int $idServico): array
+    {
         $sql = $this->conn->prepare(
             "
                 SELECT * 
@@ -119,47 +125,51 @@ final class DataDisponivelDAO
         return DataDisponivelDAO::assocsToDatasDisponiveis($r);
     }
 
-    public function update(array $datasDisponiveis, int $idServico) {
+    public function update(array $datasDisponiveis, int $idServico)
+    {
         $this->decorator->delete(["id_servico" => $idServico, "disponivel" => 1]);
 
-        foreach($datasDisponiveis as $d) {
+        foreach ($datasDisponiveis as $d) {
             $this->insert(new DataDisponivel($idServico, strtotime($d), true));
         }
     }
 
-    public function vendaEfetuada(int $idDataDisponivel, int $idVenda) {
+    public function vendaEfetuada(int $idDataDisponivel, int $idVenda)
+    {
         $this->decorator->update(["id" => $idDataDisponivel], ["id_venda" => $idVenda, "disponivel" => 0]);
     }
 
-    public function marcarComoPrestado(int $idDataDisponivel) {
+    public function marcarComoPrestado(int $idDataDisponivel)
+    {
         $this->decorator->update(["id" => $idDataDisponivel], ["prestado" => 1]);
     }
 
-    private static function assocToDataDisponivel($data) : DataDisponivel{
-        if(!isset($data)) return null;
+    private static function assocToDataDisponivel($data): ?DataDisponivel
+    {
+        if (!isset($data)) return null;
 
         $d = new DataDisponivel(
-            $data["id_servico"], 
-            strtotime($data["data"]), 
-            $data["disponivel"], 
+            $data["id_servico"],
+            strtotime($data["data"]),
+            $data["disponivel"],
             $data["id_venda"] ?? 0,
             $data["prestado"] ?? 0
         );
-        
+
         $d->id = $data["id"];
-        
+
         return $d;
     }
 
-    private static function assocsToDatasDisponiveis($data) : array{
-        if(!isset($data)) return [];
+    private static function assocsToDatasDisponiveis($data): array
+    {
+        if (!isset($data)) return [];
 
         $r = [];
-        foreach($data as $item){
+        foreach ($data as $item) {
             $r[] = DataDisponivelDAO::assocToDataDisponivel($item);
         }
 
         return $r;
     }
 }
-?>

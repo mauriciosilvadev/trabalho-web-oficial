@@ -2,7 +2,7 @@
 
 $em_compra = 0;
 
-if(isset($_REQUEST["em_compra"])){
+if (isset($_REQUEST["em_compra"])) {
     $em_compra = (int)$_REQUEST["em_compra"];
 }
 ?>
@@ -22,7 +22,7 @@ if(isset($_REQUEST["em_compra"])){
                     <input type="hidden" name="em_compra" value="<?= $em_compra ?>">
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="floatingInputEmail" minlength="8" maxlength="50"
-                         placeholder="nome@exemplo.com" name="email" required>
+                            placeholder="nome@exemplo.com" name="email" required>
                         <label for="floatingInputEmail">Endereço de Email</label>
                     </div>
 
@@ -30,7 +30,7 @@ if(isset($_REQUEST["em_compra"])){
 
                     <div class="form-floating mb-3">
                         <input type="password" class="form-control" id="floatingPassword" minlength="4" maxlength="8"
-                         placeholder="Senha" name="senha" required>
+                            placeholder="Senha" name="senha" required>
                         <label for="floatingPassword">Senha</label>
                     </div>
 
@@ -39,7 +39,7 @@ if(isset($_REQUEST["em_compra"])){
                     </div>
 
                     <?php
-                        require_once "includes/mensagens.inc.php";
+                    require_once "includes/mensagens.inc.php";
                     ?>
 
                     <a class="d-block text-center mt-2 small" href="formUsuario.php">Não possui uma conta? Cadastre-se aqui</a>

@@ -5,24 +5,33 @@ var inputAppend = `
     </div>
   `;
 
-  const divDateInput = document.querySelector("#datas");
+const divDateInput = document.querySelector("#datas");
 
-  function addDate() {
-    const lenghtDateInput = divDateInput.querySelectorAll("input").length;
-    if (lenghtDateInput < 7) {
-      divDateInput.insertAdjacentHTML("beforeend", inputAppend.replaceAll('$', lenghtDateInput));
-    }
+function addDate() {
+  const lenghtDateInput = divDateInput.querySelectorAll("input").length;
+  if (lenghtDateInput < 7) {
+    divDateInput.insertAdjacentHTML(
+      "beforeend",
+      inputAppend.replaceAll("$", lenghtDateInput)
+    );
   }
+}
 
-  function removeDate(index) {
-    divDateInput.querySelector("#data" + index).remove();
+function removeDate(index) {
+  divDateInput.querySelector("#data" + index).remove();
 
-    divDateInput.querySelectorAll("div:has(input[type='date'])").forEach((item, index) => {
+  divDateInput
+    .querySelectorAll("div:has(input[type='date'])")
+    .forEach((item, index) => {
       item.id = "data" + index;
-      item.querySelector("button").setAttribute("onclick", `removeDate(${index})`);
+      item
+        .querySelector("button")
+        .setAttribute("onclick", `removeDate(${index})`);
       item.querySelector("input").id = "data_input_" + index;
-      item.querySelector("input").setAttribute("onblur", `validarData('data_input_${index}')`);
-    })
+      item
+        .querySelector("input")
+        .setAttribute("onblur", `validarData('data_input_${index}')`);
+    });
 
-    validarData();
-  }
+  validarData();
+}

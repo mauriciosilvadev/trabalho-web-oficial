@@ -17,7 +17,7 @@ $tipoDAO = new TipoDAO();
 $usuarioDAO = new UsuarioDAO();
 
 switch ($opcao) {
-    case 1: //get all by usuario
+    case 1: // buscar serviços por usuário
         session_start();
         $idUsuario = $_SESSION["usuario"]->id;
         $servicos = $servicoDAO->getByIdUsuario($idUsuario);
@@ -33,7 +33,7 @@ switch ($opcao) {
 
         header("Location: ../views/exibirServicos.php");
         break;
-    case 2: //insert
+    case 2: // inserir
         session_start();
         try {
             $servico = new Servico(
@@ -66,14 +66,14 @@ switch ($opcao) {
             header("Location: controllerTipo.php?opcao=2");
         }
         break;
-    case 3: //get by id
+    case 3: // buscar por id
         session_start();
         $servico = getServicoById($_REQUEST["id"]);
         $_SESSION["servico"] = $servico;
 
         header("Location: controllerTipo.php?opcao=2");
         break;
-    case 4: //atualizar
+    case 4: // atualizar
         session_start();
 
         try {
@@ -106,13 +106,13 @@ switch ($opcao) {
             header("Location: controllerTipo.php?opcao=2");
         }
         break;
-    case 5: //delete
+    case 5: // excluir
         session_start();
         $servicoDAO->delete($_REQUEST["id"]);
 
         header("Location: controllerServico.php?opcao=1");
         break;
-    case 6: //get all
+    case 6: // buscar todos
         session_start();
         $idUsuario = 0;
 
@@ -132,7 +132,7 @@ switch ($opcao) {
         $_SESSION["servicos"] = $servicos;
         header("Location: controllerCarrinho.php?opcao=" . $opcaoRedirecionamento);
         break;
-    case 7: //busca
+    case 7: // buscar por termo
         session_start();
         $busca = $_REQUEST["busca"];
 
@@ -150,16 +150,15 @@ switch ($opcao) {
         header("Location: controllerCarrinho.php?opcao=1");
         break;
 
-    case 8: //marca como prestado
+    case 8: // marca como serviço prestado
         session_start();
         $datasDAO->marcarComoPrestado($_REQUEST["id"]);
         header("Location: controllerVenda.php?opcao=4");
         break;
 
-    case 10: //get all Admin
+    case 10: // buscar todos para admin
         session_start();
 
-        //validar usuário
         if (!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo != 'A') {
             header("Location: ../controllers/controllerUsuario.php?opcao=2");
         }

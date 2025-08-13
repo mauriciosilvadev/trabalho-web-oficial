@@ -20,7 +20,7 @@ $datasDAO = new DataDisponivelDAO();
 $servicoDAO = new ServicoDAO();
 
 switch ($opcao) {
-    case 1: //insert
+    case 1: // inserir
         session_start();
         $venda = new Venda(
             $_SESSION["usuario"]->id,
@@ -41,7 +41,7 @@ switch ($opcao) {
         $_SESSION["sucessos"][] = "Compra realizada com sucesso!";
         header("Location: ../views/exibirCarrinho.php");
         break;
-    case 2: //verificar se está logado
+    case 2: // verificar autenticação
         session_start();
 
         if (isset($_SESSION["usuario"])) {
@@ -50,7 +50,7 @@ switch ($opcao) {
             header("Location: ../views/formUsuarioLogin.php?em_compra=1");
         }
         break;
-    case 3: //get servios vendidos
+    case 3: // buscar serviços vendidos
         session_start();
         $idUsuario = $_SESSION["usuario"]->id;
 
@@ -75,7 +75,7 @@ switch ($opcao) {
         header("Location: ../views/exibirServicosVendidos.php");
         break;
 
-    case 4: //get serviços contratados
+    case 4: // buscar serviços contratados
         session_start();
         $idUsuario = $_SESSION["usuario"]->id;
 
@@ -100,7 +100,7 @@ switch ($opcao) {
 
         header("Location: ../views/exibirServicosContratados.php");
         break;
-    case 10: //get all by id usuário para admin visualizar serviços vendidos
+    case 10: // buscar todos os serviços vendidos para administrador visualizar serviços vendidos
         session_start();
         $idUsuario = $_SESSION["usuario"]->id;
 

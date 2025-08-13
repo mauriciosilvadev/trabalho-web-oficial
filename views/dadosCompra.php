@@ -64,7 +64,7 @@ $soma = $_SESSION["soma"];
 
             <tr align="right">
                 <td colspan="7">
-                    <font face="Verdana" size="4" color="red"><b>Valor Total = R$ <?=number_format($soma, 2, ",", ".")?></b></font>
+                    <font face="Verdana" size="4" color="red"><b>Valor Total = R$ <?= number_format($soma, 2, ",", ".") ?></b></font>
                 </td>
             </tr>
     </table>

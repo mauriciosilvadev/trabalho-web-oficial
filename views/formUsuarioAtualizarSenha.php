@@ -14,16 +14,16 @@
                 <form action="../controllers/controllerUsuario.php" method="get">
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" minlength="4" 
-                        maxlength="8" placeholder="Senha" name="senha" oninput="validarSenha()" required>
+                        <input type="password" class="form-control" id="floatingPassword" minlength="4"
+                            maxlength="8" placeholder="Senha" name="senha" oninput="validarSenha()" required>
                         <label for="floatingPassword">Nova Senha</label>
                     </div>
 
                     <hr>
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingCPassword" minlength="4" maxlength="8" 
-                        placeholder="Confirmar Senha" name="confirmar_senha" oninput="validarSenha()" required>
+                        <input type="password" class="form-control" id="floatingCPassword" minlength="4" maxlength="8"
+                            placeholder="Confirmar Senha" name="confirmar_senha" oninput="validarSenha()" required>
                         <label for="floatingCPassword">Confirmar Senha</label>
                     </div>
 
@@ -36,7 +36,7 @@
                     </div>
 
                     <?php
-                        require_once "includes/mensagens.inc.php";
+                    require_once "includes/mensagens.inc.php";
                     ?>
 
                     <input type="hidden" value="6" name="opcao">

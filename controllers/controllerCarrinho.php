@@ -6,10 +6,7 @@ require_once "../classes/servico.inc.php";
 $opcao = (int)$_REQUEST["opcao"];
 
 switch ($opcao) {
-    //remover as dadas do serviços que estão no carrinho
-    //Dessa forma mesmo que o usuário clique no botão de voltar do navegador
-    //as datas que ele selecionou não estarão mais disponíveis
-    case 1: 
+    case 1:
     case 2:
         session_start();
 
@@ -36,13 +33,13 @@ switch ($opcao) {
 
         $_SESSION["servicos"] = $servicos;
 
-        if($opcao == 1){
+        if ($opcao == 1) {
             header("Location: ../views/servicosVenda.php");
-        }else{
+        } else {
             header("Location: ../views/exibirCarrinho.php");
         }
         break;
-    case 3: // adicionar as datas do serviço no carrinho
+    case 3: // adicionar as datas no carrinho
         session_start();
 
         $idServico = (int)$_REQUEST["id_servico"];
@@ -79,7 +76,7 @@ switch ($opcao) {
             foreach ($carrinho as $item) {
                 $qtdItensNoCarrinho += sizeof($item->getDatas());
             }
-            if($qtdItensNoCarrinho == 5){
+            if ($qtdItensNoCarrinho == 5) {
                 $_SESSION["erros"][] = "Limite de 5 serviços no carrinho atingido";
                 break;
             }
@@ -95,7 +92,7 @@ switch ($opcao) {
 
         header("Location: controllerCarrinho.php?opcao=2");
         break;
-    case 4://remover data do carrinho
+    case 4: // remover data do carrinho
         session_start();
         $idServico = (int)$_REQUEST["id_servico"];
         $idData = (int)$_REQUEST["id_data"];
@@ -110,7 +107,7 @@ switch ($opcao) {
         $_SESSION["carrinho"] = $carrinho;
         header("Location: controllerServico.php?opcao=6&opcao_redirecionamento=2");
         break;
-    case 5://limpar carrinho
+    case 5: // limpar 
         session_start();
         unset($_SESSION["carrinho"]);
         $_SESSION["carrinho"] = [];

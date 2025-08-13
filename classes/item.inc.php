@@ -35,29 +35,25 @@ final class item
 
     public function addData(DataDisponivel $data)
     {
-       $this->datas[] = $data;
+        $this->datas[] = $data;
     }
 
-    public function addDatas(array $datas) {
+    public function addDatas(array $datas)
+    {
         $this->datas = array_merge($this->datas, $datas);
     }
 
     public function removeData(int $id)
     {
-        $this->datas = array_filter($this->datas, function($data) use ($id){
+        $this->datas = array_filter($this->datas, function ($data) use ($id) {
             return $data->id != $id;
         });
     }
 
-    // Serialization methods to handle session storage
     public function __sleep()
     {
         return ['datas', 'servico'];
     }
 
-    public function __wakeup()
-    {
-        // Ensure servico is properly initialized after unserialization
-        // The getServico() method will handle cases where servico is not properly initialized
-    }
+    public function __wakeup() {}
 }

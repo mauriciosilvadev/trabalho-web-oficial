@@ -44,11 +44,11 @@ CREATE TABLE `datas_disponiveis` (
 --
 
 INSERT INTO `datas_disponiveis` (`id`, `id_servico`, `id_venda`, `data`, `disponivel`, `prestado`) VALUES
-(45, 8, NULL, '2025-12-02', 1, 0),
-(46, 8, NULL, '2025-12-03', 1, 0),
-(47, 8, NULL, '2025-12-04', 1, 0),
-(48, 8, NULL, '2025-12-05', 1, 0),
-(49, 8, NULL, '2025-12-06', 1, 0),
+(45, 8, NULL, '2025-10-02', 1, 0),
+(46, 8, NULL, '2025-10-03', 1, 0),
+(47, 8, NULL, '2025-10-04', 1, 0),
+(48, 8, NULL, '2025-10-05', 1, 0),
+(49, 8, NULL, '2025-10-06', 1, 0),
 (56, 7, NULL, '2025-11-25', 1, 0),
 (57, 7, NULL, '2025-11-26', 1, 0),
 (58, 7, NULL, '2025-11-27', 1, 0),
@@ -93,7 +93,27 @@ INSERT INTO `servicos` (`id`, `id_prestador`, `nome`, `valor`, `descricao`, `cid
 (9, 6, 'Design de Logotipos', 350, 'Criação de identidade visual para empresas', 'Vitória', 4, 0),
 (10, 8, 'Configuração de Redes', 450, 'Instalação e configuração de redes Wi-Fi', 'Vitória', 5, 0),
 (11, 8, 'Consultoria em Sistemas', 600, 'Análise e otimização de processos digitais', 'Vitória', 6, 0),
-(12, 6, 'Backup e Segurança', 280, 'Implementação de sistemas de backup', 'Vitória', 7, 0);
+(12, 6, 'Backup e Segurança', 280, 'Implementação de sistemas de backup', 'Vitória', 7, 0),
+(13, 5, 'Desenvolvimento de App Mobile', 1200, 'Aplicativos para Android e iOS', 'Vitória', 2, 0),
+(14, 7, 'Instalação de Software', 120, 'Instalação e configuração de programas', 'Vitória', 3, 0),
+(15, 6, 'Design de Banners', 200, 'Criação de materiais publicitários', 'Vitória', 4, 0),
+(16, 8, 'Monitoramento de Rede', 380, 'Supervisão e análise de tráfego', 'Vitória', 5, 0),
+(17, 5, 'Auditoria de Sistemas', 750, 'Análise completa de infraestrutura TI', 'Vitória', 6, 0),
+(18, 7, 'Antivírus Corporativo', 320, 'Proteção avançada contra malware', 'Vitória', 7, 0),
+(19, 8, 'Automação de Processos', 900, 'Scripts e workflows automatizados', 'Vitória', 8, 0),
+(20, 6, 'E-commerce Completo', 1500, 'Loja virtual com pagamento integrado', 'Vitória', 2, 0),
+(21, 5, 'Suporte Remoto', 150, 'Assistência técnica à distância', 'Vitória', 3, 0),
+(22, 7, 'Identidade Visual', 480, 'Criação de marca completa', 'Vitória', 4, 0),
+(23, 8, 'Cabeamento Estruturado', 650, 'Instalação de rede física', 'Vitória', 5, 0),
+(24, 6, 'Migração de Dados', 420, 'Transferência segura de informações', 'Vitória', 6, 0),
+(25, 5, 'Firewall Empresarial', 580, 'Configuração de proteção de rede', 'Vitória', 7, 0),
+(26, 7, 'Sistema de Estoque', 1100, 'Controle automatizado de inventário', 'Vitória', 8, 0),
+(27, 8, 'Landing Page', 400, 'Página de conversão otimizada', 'Vitória', 2, 0),
+(28, 6, 'Recuperação de Dados', 250, 'Restauração de arquivos perdidos', 'Vitória', 3, 0),
+(29, 5, 'Design de Cartões', 180, 'Cartões de visita e materiais gráficos', 'Vitória', 4, 0),
+(30, 7, 'VPN Corporativa', 520, 'Acesso remoto seguro', 'Vitória', 5, 0),
+(31, 8, 'Análise de Performance', 680, 'Otimização de sistemas e aplicações', 'Vitória', 6, 0),
+(32, 6, 'Criptografia de Dados', 450, 'Proteção avançada de informações', 'Vitória', 7, 0);
 
 -- --------------------------------------------------------
 

@@ -95,12 +95,14 @@ final class ServicoDAO
         return ServicoDAO::assocsToServicos($servicosAssoc);
     }
 
-    public function getAllToAdmin(): array{
+    public function getAllToAdmin(): array
+    {
         $servicosAssoc = $this->decorator->find(["esta_deletado" => 0]);
         return ServicoDAO::assocsToServicos($servicosAssoc);
     }
 
-    public function getAllVendidosByIdVendaIdPerstador($idVenda, $idUsuario): array{
+    public function getAllVendidosByIdVendaIdPerstador($idVenda, $idUsuario): array
+    {
         $sql = $this->conn->prepare("
         SELECT 
             s.id as id,
@@ -130,7 +132,8 @@ final class ServicoDAO
         return ServicoDAO::assocsToServicos($servicosAssoc);
     }
 
-    public function getAllContratadosByIdVenda($idVenda): array{
+    public function getAllContratadosByIdVenda($idVenda): array
+    {
         $sql = $this->conn->prepare("
         SELECT 
             s.id as id,
@@ -180,17 +183,17 @@ final class ServicoDAO
         WHERE 
             s.esta_deletado = 0 AND
             d.disponivel = 1 AND
-            d.data > CURRENT_DATE AND ".
+            d.data > CURRENT_DATE AND " .
             (is_numeric($busca) ? "s.valor = :busca" : "
             (
                 s.nome LIKE :busca OR
                 s.cidade LIKE :busca OR
                 s.descricao LIKE :busca OR
                 t.nome LIKE :busca
-            )") . 
-        " GROUP BY d.id_servico");
+            )") .
+            " GROUP BY d.id_servico");
 
-        if(!is_numeric($busca)){
+        if (!is_numeric($busca)) {
             $busca = "%$busca%";
         }
 
@@ -215,7 +218,7 @@ final class ServicoDAO
         );
         $s->id = $data["id"];
 
-        if(isset($data["nome_prestador"])){
+        if (isset($data["nome_prestador"])) {
             $s->nomePrestador = $data["nome_prestador"];
         }
 
@@ -235,5 +238,3 @@ final class ServicoDAO
         return $r ?? [];
     }
 }
-
-?>

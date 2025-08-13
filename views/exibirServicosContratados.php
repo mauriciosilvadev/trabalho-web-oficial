@@ -8,7 +8,7 @@ require_once 'includes/cabecalho.inc.php';
 
 $vendas = [];
 
-if(isset($_SESSION["vendas_feitas"])){
+if (isset($_SESSION["vendas_feitas"])) {
     $vendas = $_SESSION["vendas_feitas"];
 }
 ?>
@@ -16,12 +16,12 @@ if(isset($_SESSION["vendas_feitas"])){
 <h1 class="text-center">Servicos contratados</h1>
 <?php include_once "includes/mensagens.inc.php" ?>
 <p>
-<?php
-    if(sizeof($vendas) == 0){
+    <?php
+    if (sizeof($vendas) == 0) {
         $title = "Nenhum serviço encontrado";
         $message = "Não foram encontrados serviços contratados.";
         require_once "includes/carrinhoBuscaVazia.php";
-    }else{
+    } else {
 
     ?>
 <div class="table-responsive">
@@ -47,30 +47,32 @@ if(isset($_SESSION["vendas_feitas"])){
                     if ($servico === null) {
                         continue;
                     }
-                    foreach($itens->getDatas() as $data){
-                $contador++;
+                    foreach ($itens->getDatas() as $data) {
+                        $contador++;
             ?>
-            <tr class="align-middle" style="text-align: center">
-                <td><?= $contador ?></td>
-                <td><?= $servico->nome ?></td>
-                <td><?= $servico->nomePrestador ?></td>
-                <td><?= $servico->cidade ?></td>
-                <td><?= formatarData($data->data) ?></td>
-                <td>R$ <?= number_format($servico->valor, 2, ",", ".") ?></td>
-                <td><?= $venda->formaPagamento ?></td>
-                <?php
-                if($data->prestado){
-                    echo "<td>serviço prestado</td>";
-                }else{
-                    echo "<td><a href='../controllers/controllerServico.php?opcao=8&id=". $data->id . "' class='btn btn-success btn-sm'>Prestado?</a></td>";
-                }
-                ?>
-            </tr>
+                        <tr class="align-middle" style="text-align: center">
+                            <td><?= $contador ?></td>
+                            <td><?= $servico->nome ?></td>
+                            <td><?= $servico->nomePrestador ?></td>
+                            <td><?= $servico->cidade ?></td>
+                            <td><?= formatarData($data->data) ?></td>
+                            <td>R$ <?= number_format($servico->valor, 2, ",", ".") ?></td>
+                            <td><?= $venda->formaPagamento ?></td>
+                            <?php
+                            if ($data->prestado) {
+                                echo "<td>serviço prestado</td>";
+                            } else {
+                                echo "<td><a href='../controllers/controllerServico.php?opcao=8&id=" . $data->id . "' class='btn btn-success btn-sm'>Prestado?</a></td>";
+                            }
+                            ?>
+                        </tr>
 
-            <?php }}} ?>
+            <?php }
+                }
+            } ?>
     </table>
 
-    <?php
+<?php
     }
     require_once 'includes/rodape.inc.php';
-    ?>
+?>

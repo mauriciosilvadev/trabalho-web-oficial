@@ -8,7 +8,7 @@ require_once 'includes/cabecalho.inc.php';
 
 $carrinho = [];
 
-if(isset($_SESSION["carrinho"])){
+if (isset($_SESSION["carrinho"])) {
     $carrinho = $_SESSION["carrinho"];
 }
 
@@ -18,10 +18,10 @@ if(isset($_SESSION["carrinho"])){
 <?php include_once "includes/mensagens.inc.php" ?>
 <p>
     <?php
-    if(sizeof($carrinho) == 0){
+    if (sizeof($carrinho) == 0) {
         include_once 'includes/carrinhoVazio.inc.php';
         $_SESSION["soma"] = 0;
-    }else{
+    } else {
 
     ?>
 <div class="table-responsive">
@@ -47,24 +47,25 @@ if(isset($_SESSION["carrinho"])){
                     continue;
                 }
                 foreach ($item->getDatas() as $data) {
-                $contador++;
-                $soma += $servico->valor;
+                    $contador++;
+                    $soma += $servico->valor;
             ?>
-            <tr class="align-middle" style="text-align: center">
-                <td><?= $contador ?></td>
-                <td><?= $servico->descricao ?></td>
-                <td><?= $servico->nomePrestador ?></td>
-                <td><?= $servico->cidade ?></td>
-                <td><?= formatarData($data->data) ?></td>
-                <td>R$ <?= number_format($servico->valor, 2, ",", ".") ?></td>
-                <td><a href="../controllers/controllerCarrinho.php?opcao=4&id_servico=<?= $servico->id?>&id_data=<?= $data->id ?>" class='btn btn-danger btn-sm'>X</a></td>
-            </tr>
+                    <tr class="align-middle" style="text-align: center">
+                        <td><?= $contador ?></td>
+                        <td><?= $servico->descricao ?></td>
+                        <td><?= $servico->nomePrestador ?></td>
+                        <td><?= $servico->cidade ?></td>
+                        <td><?= formatarData($data->data) ?></td>
+                        <td>R$ <?= number_format($servico->valor, 2, ",", ".") ?></td>
+                        <td><a href="../controllers/controllerCarrinho.php?opcao=4&id_servico=<?= $servico->id ?>&id_data=<?= $data->id ?>" class='btn btn-danger btn-sm'>X</a></td>
+                    </tr>
 
-            <?php }} ?>
+            <?php }
+            } ?>
 
             <tr align="right">
                 <td colspan="8">
-                    <font face="Verdana" size="4" color="red"><b>Valor Total = <?=number_format($soma, 2, ",", ".")?></b></font>
+                    <font face="Verdana" size="4" color="red"><b>Valor Total = <?= number_format($soma, 2, ",", ".") ?></b></font>
                 </td>
             </tr>
     </table>
@@ -82,8 +83,8 @@ if(isset($_SESSION["carrinho"])){
         </div>
     </div>
 
-    <?php
+<?php
         $_SESSION["soma"] = $soma;
     }
     require_once 'includes/rodape.inc.php';
-    ?>
+?>

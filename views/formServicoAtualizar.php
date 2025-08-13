@@ -15,11 +15,11 @@ $servico = $_SESSION["servico"];
   <div class="col-md-6">
     <label for="nome" class="form-label">Nome: </label>
     <input type="text" class="form-control" name="nome" required
-      minlength="10" maxlength="50" value="<?=$servico->nome?>">
+      minlength="10" maxlength="50" value="<?= $servico->nome ?>">
   </div>
   <div class="col-md-3">
     <label for="valor" class="form-label">Valor: </label>
-    <input type="number" class="form-control" min="0.01" name="valor" required value="<?=$servico->valor?>" lang="pt-BR" step="0.01">
+    <input type="number" class="form-control" min="0.01" name="valor" required value="<?= $servico->valor ?>" lang="pt-BR" step="0.01">
   </div>
   <div class="col-md-3">
     <label for="tipo" class="form-label">Tipo: </label>
@@ -35,14 +35,14 @@ $servico = $_SESSION["servico"];
 
   <div class="col-md-4">
     <label for="cidade" class="form-label">Cidade: </label>
-    <input type="text" class="form-control" minlength="3" maxlength="50" 
-    name="cidade" id="cidade" required value="<?=$servico->cidade?>">
+    <input type="text" class="form-control" minlength="3" maxlength="50"
+      name="cidade" id="cidade" required value="<?= $servico->cidade ?>">
   </div>
 
   <div class="col-md-8">
     <label for="descricao" class="form-label">Descrição do serviço: </label>
-    <input type="text" class="form-control" minlength="10" maxlength="50" 
-    required name="descricao" id="descricao" value="<?=$servico->descricao?>">
+    <input type="text" class="form-control" minlength="10" maxlength="50"
+      required name="descricao" id="descricao" value="<?= $servico->descricao ?>">
   </div>
 
   <div class="col-md-8 col-lg-6" id="datas">
@@ -56,16 +56,16 @@ $servico = $_SESSION["servico"];
     foreach ($servico->datasDisponiveis as $d) {
     ?>
 
-      <div class="d-flex" id="data<?=$contador?>">
+      <div class="d-flex" id="data<?= $contador ?>">
 
         <input type="date" name="datas[]" oninput="validarData()"
-          class="form-control mb-2 data_input" <?=$d->disponivel ? "required": "disabled"?> value="<?=parseISO($d->data)?>">
+          class="form-control mb-2 data_input" <?= $d->disponivel ? "required" : "disabled" ?> value="<?= parseISO($d->data) ?>">
 
         <?php
         if ($d->disponivel) {
         ?>
 
-          <button type="button" onclick="removeDate(<?=$contador?>)"
+          <button type="button" onclick="removeDate(<?= $contador ?>)"
             class="mb-2 btn btn-outline-danger mx-1" style="min-width: 100px;">Remover</button>
 
         <?php
@@ -81,8 +81,8 @@ $servico = $_SESSION["servico"];
   </div>
 
   <input type="hidden" name="opcao" value="4">
-  <input type="hidden" name="id" value="<?=$servico->id?>">
-  <input type="hidden" name="idPrestador" value="<?=$servico->idPrestador?>">
+  <input type="hidden" name="id" value="<?= $servico->id ?>">
+  <input type="hidden" name="idPrestador" value="<?= $servico->idPrestador ?>">
 
   <div class="col-12">
     <button type="submit" class="btn btn-primary">Atualizar</button>
@@ -94,7 +94,7 @@ $servico = $_SESSION["servico"];
   </div>
 
   <?php
-    require_once "includes/mensagens.inc.php";
+  require_once "includes/mensagens.inc.php";
   ?>
 </form>
 

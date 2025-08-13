@@ -1,8 +1,5 @@
 <?php require_once "includes/cabecalho.inc.php" ?>
 
-<!-- CONTEUDO -->
-<h1 class="text-center">Cadastro de Usuário</h1>
-
 <div class="row">
     <div class="col-lg-10 col-xl-9 mx-auto">
         <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
@@ -10,7 +7,7 @@
                 <!-- Background image for card set in CSS! -->
             </div>
             <div class="card-body p-4 p-sm-5">
-                <h5 class="card-title text-center mb-5 fw-light fs-5">Entre com suas informações de Cadastro</h5>
+                <h5 class="card-title text-center mb-5 fw-light fs-5">Cadastre-se</h5>
                 <form action="../controllers/controllerUsuario.php" method="get">
 
                     <div class="form-floating mb-3">
@@ -36,16 +33,16 @@
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInputTel" oninput="validarTelefone(this)"
-                        placeholder="XX XXXXX-XXXX" name="telefone" required>
-                        <label for="floatingInputTel">Telefone (XX XXXXX-XXXX)</label>
+                            placeholder="XX XXXXX-XXXX" name="telefone" required>
+                        <label for="floatingInputTel">Telefone</label>
                     </div>
 
                     <hr>
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInputCPF" oninput="validarCPF_CNPJ(this)"
-                        placeholder="XXX.XXX.XXX-XX" name="cpf_cnpj" required>
-                        <label for="floatingInputCPF">CPF ou CNPJ (XXX.XXX.XXX-XX)</label>
+                            placeholder="XXX.XXX.XXX-XX" name="cpf_cnpj" required>
+                        <label for="floatingInputCPF">CPF ou CNPJ</label>
                     </div>
 
                     <hr>
@@ -62,16 +59,16 @@
                     <hr>
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" minlength="4" 
-                        maxlength="8" placeholder="Senha" name="senha" oninput="validarSenha()" required>
+                        <input type="password" class="form-control" id="floatingPassword" minlength="4"
+                            maxlength="8" placeholder="Senha" name="senha" oninput="validarSenha()" required>
                         <label for="floatingPassword">Senha</label>
                     </div>
 
                     <hr>
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingCPassword" minlength="4" maxlength="8" 
-                        placeholder="Confirmar Senha" name="confirmar_senha" oninput="validarSenha()" required>
+                        <input type="password" class="form-control" id="floatingCPassword" minlength="4" maxlength="8"
+                            placeholder="Confirmar Senha" name="confirmar_senha" oninput="validarSenha()" required>
                         <label for="floatingCPassword">Confirmar Senha</label>
                     </div>
 
@@ -86,12 +83,12 @@
                         <label class="form-check-label" for="floatingPestador">É prestador de serviço</label>
                     </div>
 
-                    <div class="d-grid mb-2">
-                        <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Efetuar Cadastro</button>
+                    <div class="d-grid mb-2 w-100">
+                        <button class="btn btn-lg btn-primary btn-login fw-bold" type="submit">Efetuar Cadastro</button>
                     </div>
 
-                     <?php
-                        require_once "includes/mensagens.inc.php";
+                    <?php
+                    require_once "includes/mensagens.inc.php";
                     ?>
 
                     <a class="d-block text-center mt-2 small" href="formUsuarioLogin.php">Possui uma conta? Entre aqui</a>

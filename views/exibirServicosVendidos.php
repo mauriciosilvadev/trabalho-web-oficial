@@ -9,7 +9,7 @@ require_once 'includes/cabecalho.inc.php';
 
 $vendas = [];
 
-if(isset($_SESSION["vendas_feitas"])){
+if (isset($_SESSION["vendas_feitas"])) {
     $vendas = $_SESSION["vendas_feitas"];
 }
 ?>
@@ -17,12 +17,12 @@ if(isset($_SESSION["vendas_feitas"])){
 <h1 class="text-center">Servicos vendidos</h1>
 <?php include_once "includes/mensagens.inc.php" ?>
 <p>
-<?php
-    if(sizeof($vendas) == 0){
+    <?php
+    if (sizeof($vendas) == 0) {
         $title = "Nenhum serviço vendido";
         $message = "Não foram encontrados serviços vendidos.";
         require_once "includes/carrinhoBuscaVazia.php";
-    }else{
+    } else {
 
     ?>
 <div class="table-responsive">
@@ -50,45 +50,47 @@ if(isset($_SESSION["vendas_feitas"])){
                         continue;
                     }
                     $datas = $itens->getDatas();
-                    foreach($datas as $data){
-                $contador++;
-                if($data->prestado){
-                    $valorTotalServicosPrestados += $servico->valor;
-                }
-                $valorTotal += $servico->valor;
+                    foreach ($datas as $data) {
+                        $contador++;
+                        if ($data->prestado) {
+                            $valorTotalServicosPrestados += $servico->valor;
+                        }
+                        $valorTotal += $servico->valor;
             ?>
-            <tr class="align-middle" style="text-align: center">
-                <td><?= $contador ?></td>
-                <td><?= $servico->nome ?></td>
-                <td><?= $servico->cidade ?></td>
-                <td><?= formatarData($data->data) ?></td>
-                <td>R$ <?= number_format($servico->valor, 2, ",", ".") ?></td>
-                <td><?= $venda->formaPagamento ?></td>
-                <?php
-                if($data->prestado){
-                    echo "<td>serviço prestado</td>";
-                }else{
-                    echo "<td>serviço não prestado</td>";
-                }
-                ?>
-            </tr>
+                        <tr class="align-middle" style="text-align: center">
+                            <td><?= $contador ?></td>
+                            <td><?= $servico->nome ?></td>
+                            <td><?= $servico->cidade ?></td>
+                            <td><?= formatarData($data->data) ?></td>
+                            <td>R$ <?= number_format($servico->valor, 2, ",", ".") ?></td>
+                            <td><?= $venda->formaPagamento ?></td>
+                            <?php
+                            if ($data->prestado) {
+                                echo "<td>serviço prestado</td>";
+                            } else {
+                                echo "<td>serviço não prestado</td>";
+                            }
+                            ?>
+                        </tr>
 
-            <?php }}} ?>
+            <?php }
+                }
+            } ?>
 
             <tr align="right">
                 <td colspan="8">
-                    <font face="Verdana" size="4" color="green"><b>Valor total serviços prestados = <?=number_format($valorTotalServicosPrestados, 2, ",", ".")?></b></font>
+                    <font face="Verdana" size="4" color="green"><b>Valor total serviços prestados = <?= number_format($valorTotalServicosPrestados, 2, ",", ".") ?></b></font>
                 </td>
             </tr>
 
             <tr align="right">
                 <td colspan="8">
-                    <font face="Verdana" size="4" color="green"><b>Valor total = <?=number_format($valorTotal, 2, ",", ".")?></b></font>
+                    <font face="Verdana" size="4" color="green"><b>Valor total = <?= number_format($valorTotal, 2, ",", ".") ?></b></font>
                 </td>
             </tr>
     </table>
 
-    <?php
+<?php
     }
     require_once 'includes/rodape.inc.php';
-    ?>
+?>

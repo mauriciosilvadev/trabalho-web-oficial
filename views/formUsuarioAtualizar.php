@@ -7,7 +7,7 @@ $opcaoUpdate = 5;
 $opcaoUpdate = 5;
 $opcaoRemocao = 7;
 
-if($usuario->tipo == "A"){
+if ($usuario->tipo == "A") {
     $opcaoUpdate = 12;
     $opcaoRemocao = 13;
     $usuario = $_SESSION["usuarioAtualizar"];
@@ -54,7 +54,7 @@ if($usuario->tipo == "A"){
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInputTel" oninput="validarTelefone(this)"
-                        placeholder="XX XXXXX-XXXX" name="telefone"
+                            placeholder="XX XXXXX-XXXX" name="telefone"
                             value="<?= $usuario->telefone ?>">
                         <label for="floatingInputTel">Telefone (XX XXXXX-XXXX)</label>
                     </div>
@@ -63,7 +63,7 @@ if($usuario->tipo == "A"){
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInputCPF" oninput="validarCPF_CNPJ(this)"
-                        value="<?= $usuario->cpf_cnpj?>" placeholder="XXX.XXX.XXX-XX" name="cpf_cnpj" required>
+                            value="<?= $usuario->cpf_cnpj ?>" placeholder="XXX.XXX.XXX-XX" name="cpf_cnpj" required>
                         <label for="floatingInputCPF">CPF ou CNPJ (XXX.XXX.XXX-XX)</label>
                     </div>
 
@@ -94,7 +94,7 @@ if($usuario->tipo == "A"){
                     <?php
                     if (!$usuario->possuiServicosFuturosAPrestar && !$usuario->possuiServicosFuturosContratados) {
                         echo "<div class='d-grid mb-2'>
-                        <a href='../controllers/controllerUsuario.php?opcao=". $opcaoRemocao ."' class='btn btn-lg btn-danger btn-login fw-bold text-uppercase' >Remover conta</a>
+                        <a href='../controllers/controllerUsuario.php?opcao=" . $opcaoRemocao . "' class='btn btn-lg btn-danger btn-login fw-bold text-uppercase' >Remover conta</a>
                         </div>";
                     }
                     ?>
