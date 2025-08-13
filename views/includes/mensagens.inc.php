@@ -17,7 +17,7 @@ if (isset($_SESSION["sucessos"])) {
 <?php
 foreach ($sucessos as $s) {
 ?>
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success" role="alert" id="success-message">
         <?= $s ?>
     </div>
 <?php } ?>
@@ -30,3 +30,19 @@ foreach ($erros as $e) {
 </div>
 
 <?php } ?>
+
+<script>
+// Auto-hide success messages after 5 seconds
+document.addEventListener('DOMContentLoaded', function() {
+    const successMessages = document.querySelectorAll('#success-message');
+    successMessages.forEach(function(message) {
+        setTimeout(function() {
+            message.style.transition = 'opacity 0.5s';
+            message.style.opacity = '0';
+            setTimeout(function() {
+                message.remove();
+            }, 500);
+        }, 5000); // 5 segundos
+    });
+});
+</script>

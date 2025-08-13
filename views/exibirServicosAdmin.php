@@ -5,6 +5,7 @@ require_once 'includes/cabecalho.inc.php';
 $servicos = $_SESSION['servicos'];
 ?>
 <p>
+<?php require_once 'includes/mensagens.inc.php'; ?>
 <h1 class="text-center">Serviços cadastrados</h1>
 <p>
 <div class="table-responsive">

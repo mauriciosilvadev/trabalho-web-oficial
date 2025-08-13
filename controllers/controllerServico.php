@@ -110,7 +110,13 @@ switch ($opcao) {
         session_start();
         $servicoDAO->delete($_REQUEST["id"]);
 
-        header("Location: controllerServico.php?opcao=1");
+        $_SESSION["sucessos"][] = "Serviço excluído com sucesso!";
+
+        if (isset($_SESSION["usuario"]) && $_SESSION["usuario"]->tipo == 'A') {
+            header("Location: controllerServico.php?opcao=10");
+        } else {
+            header("Location: controllerServico.php?opcao=1");
+        }
         break;
     case 6: // buscar todos
         session_start();

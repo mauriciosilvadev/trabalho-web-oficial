@@ -37,7 +37,7 @@ $tipos = $_SESSION["tipos"];
 
   <div class="col-md-8">
     <label for="descricao" class="form-label">Descrição do serviço: </label>
-    <input type="text" class="form-control" minlength="10" maxlength="50" name="descricao" id="descricao" required>
+    <textarea class="form-control" minlength="10" maxlength="500" name="descricao" id="descricao" rows="3" required></textarea>
   </div>
 
   <div class="col-md-8 col-lg-6" id="datas">
