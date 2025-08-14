@@ -17,12 +17,6 @@
             Home
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link fw-semibold" href="../controllers/controllerServico.php?opcao=6&opcao_redirecionamento=1">
-            <i class="fas fa-cogs me-1"></i>
-            Serviços
-          </a>
-        </li>
       </ul>
 
       <div class="d-flex align-items-center">

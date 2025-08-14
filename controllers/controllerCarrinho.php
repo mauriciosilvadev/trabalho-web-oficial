@@ -5,51 +5,46 @@ require_once "../classes/servico.inc.php";
 
 $opcao = (int)$_REQUEST["opcao"];
 
-switch ($opcao) {
-    case 1:
-    case 2:
-        session_start();
+if ($opcao == 1 || $opcao == 2) {
+    session_start();
 
-        $carrinho = $_SESSION["carrinho"];
-        $servicos = $_SESSION["servicos"];
+    $carrinho = $_SESSION["carrinho"];
+    $servicos = $_SESSION["servicos"];
 
-        foreach ($carrinho as $item) {
-            $servico = $item->getServico();
-            if ($servico === null) {
-                continue;
-            }
-            $s = buscarServicoById($servicos, $servico->id);
+    foreach ($carrinho as $item) {
+        $servico = $item->getServico();
+        if ($servico === null) {
+            continue;
+        }
+        $s = buscarServicoById($servicos, $servico->id);
 
-            if ($s == null) {
-                continue;
-            }
-
-            foreach ($item->getDatas() as $data) {
-                $s->datasDisponiveis = array_filter($s->datasDisponiveis, function ($d) use ($data) {
-                    return $d->id != $data->id;
-                });
-            }
+        if ($s == null) {
+            continue;
         }
 
-        $_SESSION["servicos"] = $servicos;
-
-        if ($opcao == 1) {
-            header("Location: ../views/servicosVenda.php");
-        } else {
-            header("Location: ../views/exibirCarrinho.php");
+        foreach ($item->getDatas() as $data) {
+            $s->datasDisponiveis = array_filter($s->datasDisponiveis, function ($d) use ($data) {
+                return $d->id != $data->id;
+            });
         }
-        break;
-    case 3: // adicionar as datas no carrinho
-        session_start();
+    }
 
-        $idServico = (int)$_REQUEST["id_servico"];
-        $idDatas = $_REQUEST["id_datas"];
+    $_SESSION["servicos"] = $servicos;
 
-        if (!isset($idDatas) || sizeof($idDatas) == 0) {
-            header("Location: ../views/exibirCarrinho.php");
-            break;
-        }
+    if ($opcao == 1) {
+        header("Location: ../views/servicosVenda.php");
+    } else {
+        header("Location: ../views/exibirCarrinho.php");
+    }
+} elseif ($opcao == 3) { // adicionar as datas no carrinho
+    session_start();
 
+    $idServico = (int)$_REQUEST["id_servico"];
+    $idDatas = $_REQUEST["id_datas"];
+
+    if (!isset($idDatas) || sizeof($idDatas) == 0) {
+        header("Location: ../views/exibirCarrinho.php");
+    } else {
         $carrinho = [];
         if (isset($_SESSION["carrinho"])) {
             $carrinho = $_SESSION["carrinho"];
@@ -91,28 +86,26 @@ switch ($opcao) {
         $_SESSION["carrinho"] = $carrinho;
 
         header("Location: controllerCarrinho.php?opcao=2");
-        break;
-    case 4: // remover data do carrinho
-        session_start();
-        $idServico = (int)$_REQUEST["id_servico"];
-        $idData = (int)$_REQUEST["id_data"];
+    }
+} elseif ($opcao == 4) { // remover data do carrinho
+    session_start();
+    $idServico = (int)$_REQUEST["id_servico"];
+    $idData = (int)$_REQUEST["id_data"];
 
-        $carrinho = $_SESSION["carrinho"];
+    $carrinho = $_SESSION["carrinho"];
 
-        $item = buscarItemNoCarrinhoById($carrinho, $idServico);
+    $item = buscarItemNoCarrinhoById($carrinho, $idServico);
 
-        if ($item !== null) {
-            $item->removeData($idData);
-        }
-        $_SESSION["carrinho"] = $carrinho;
-        header("Location: controllerServico.php?opcao=6&opcao_redirecionamento=2");
-        break;
-    case 5: // limpar 
-        session_start();
-        unset($_SESSION["carrinho"]);
-        $_SESSION["carrinho"] = [];
-        header("Location: controllerServico.php?opcao=6&opcao_redirecionamento=2");
-        break;
+    if ($item !== null) {
+        $item->removeData($idData);
+    }
+    $_SESSION["carrinho"] = $carrinho;
+    header("Location: controllerServico.php?opcao=6&opcao_redirecionamento=2");
+} elseif ($opcao == 5) { // limpar 
+    session_start();
+    unset($_SESSION["carrinho"]);
+    $_SESSION["carrinho"] = [];
+    header("Location: controllerServico.php?opcao=6&opcao_redirecionamento=2");
 }
 
 function buscarItemNoCarrinhoById($carrinho, $id)

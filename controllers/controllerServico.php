@@ -16,176 +16,164 @@ $datasDAO = new DataDisponivelDAO();
 $tipoDAO = new TipoDAO();
 $usuarioDAO = new UsuarioDAO();
 
-switch ($opcao) {
-    case 1: // buscar serviços por usuário
-        session_start();
-        $idUsuario = $_SESSION["usuario"]->id;
-        $servicos = $servicoDAO->getByIdUsuario($idUsuario);
+if ($opcao == 1) { // buscar serviços por usuário
+    session_start();
+    $idUsuario = $_SESSION["usuario"]->id;
+    $servicos = $servicoDAO->getByIdUsuario($idUsuario);
 
-        foreach ($servicos as $servico) {
-            $servico->tipo = $tipoDAO->getById($servico->idTipo);
-            $datasDisponiveis = $datasDAO->findByIdServico($servico->id);
+    foreach ($servicos as $servico) {
+        $servico->tipo = $tipoDAO->getById($servico->idTipo);
+        $datasDisponiveis = $datasDAO->findByIdServico($servico->id);
 
-            $servico->possuiServicoAFazer = possuiServicoAFazer($datasDisponiveis);
+        $servico->possuiServicoAFazer = possuiServicoAFazer($datasDisponiveis);
+    }
+
+    $_SESSION["servicos"] = $servicos;
+
+    header("Location: ../views/exibirServicos.php");
+} elseif ($opcao == 2) { // inserir
+    session_start();
+    try {
+        $servico = new Servico(
+            $_REQUEST["nome"],
+            $_REQUEST["valor"],
+            $_REQUEST["cidade"],
+            trim($_REQUEST["descricao"]),
+            $_REQUEST["tipo"],
+            $_SESSION["usuario"]->id
+        );
+
+        $idServico = $servicoDAO->insert(
+            $servico
+        );
+
+        $datas = [];
+
+        if (isset($_REQUEST["datas"])) {
+            $datas = $_REQUEST["datas"];
         }
 
-        $_SESSION["servicos"] = $servicos;
-
-        header("Location: ../views/exibirServicos.php");
-        break;
-    case 2: // inserir
-        session_start();
-        try {
-            $servico = new Servico(
-                $_REQUEST["nome"],
-                $_REQUEST["valor"],
-                $_REQUEST["cidade"],
-                trim($_REQUEST["descricao"]),
-                $_REQUEST["tipo"],
-                $_SESSION["usuario"]->id
-            );
-
-            $idServico = $servicoDAO->insert(
-                $servico
-            );
-
-            $datas = [];
-
-            if (isset($_REQUEST["datas"])) {
-                $datas = $_REQUEST["datas"];
-            }
-
-            foreach ($datas as $data) {
-                $data = new DataDisponivel($idServico, strtotime($data), true);
-                $datasDAO->insert($data);
-            }
-
-            header("Location: controllerServico.php?opcao=1");
-        } catch (Exception $e) {
-            $_SESSION["erros"][] = "Erro ao inserir serviço";
-            header("Location: controllerTipo.php?opcao=2");
+        foreach ($datas as $data) {
+            $data = new DataDisponivel($idServico, strtotime($data), true);
+            $datasDAO->insert($data);
         }
-        break;
-    case 3: // buscar por id
-        session_start();
-        $servico = getServicoById($_REQUEST["id"]);
-        $_SESSION["servico"] = $servico;
 
+        header("Location: controllerServico.php?opcao=1");
+    } catch (Exception $e) {
+        $_SESSION["erros"][] = "Erro ao inserir serviço";
         header("Location: controllerTipo.php?opcao=2");
-        break;
-    case 4: // atualizar
-        session_start();
+    }
+} elseif ($opcao == 3) { // buscar por id
+    session_start();
+    $servico = getServicoById($_REQUEST["id"]);
+    $_SESSION["servico"] = $servico;
 
-        try {
-            $servico = new Servico(
-                $_REQUEST["nome"],
-                $_REQUEST["valor"],
-                $_REQUEST["cidade"],
-                trim($_REQUEST["descricao"]),
-                $_REQUEST["tipo"],
-                $_REQUEST["idPrestador"]
-            );
-            $servico->id = $_REQUEST["id"];
+    header("Location: controllerTipo.php?opcao=2");
+} elseif ($opcao == 4) { // atualizar
+    session_start();
 
-            $servicoDAO->update($servico);
+    try {
+        $servico = new Servico(
+            $_REQUEST["nome"],
+            $_REQUEST["valor"],
+            $_REQUEST["cidade"],
+            trim($_REQUEST["descricao"]),
+            $_REQUEST["tipo"],
+            $_REQUEST["idPrestador"]
+        );
+        $servico->id = $_REQUEST["id"];
 
-            $datas = [];
+        $servicoDAO->update($servico);
 
-            if (isset($_REQUEST["datas"])) {
-                $datas = $_REQUEST["datas"];
-            }
+        $datas = [];
 
-            $datasDAO->update($datas, $servico->id);
-
-            $servico = getServicoById($servico->id);
-            $_SESSION["servico"] = $servico;
-            $_SESSION["sucessos"][] = "Serviço atualizado com sucesso";
-            header("Location: controllerTipo.php?opcao=2");
-        } catch (Exception $e) {
-            $_SESSION["erros"][] = "Erro ao atualizar serviço";
-            header("Location: controllerTipo.php?opcao=2");
-        }
-        break;
-    case 5: // excluir
-        session_start();
-        $servicoDAO->delete($_REQUEST["id"]);
-
-        $_SESSION["sucessos"][] = "Serviço excluído com sucesso!";
-
-        if (isset($_SESSION["usuario"]) && $_SESSION["usuario"]->tipo == 'A') {
-            header("Location: controllerServico.php?opcao=10");
-        } else {
-            header("Location: controllerServico.php?opcao=1");
-        }
-        break;
-    case 6: // buscar todos
-        session_start();
-        $idUsuario = 0;
-
-        if (isset($_SESSION["usuario"])) {
-            $idUsuario = $_SESSION["usuario"]->id;
+        if (isset($_REQUEST["datas"])) {
+            $datas = $_REQUEST["datas"];
         }
 
-        $opcaoRedirecionamento = $_REQUEST["opcao_redirecionamento"] ?? 1;
-        $servicos = $servicoDAO->getAll($idUsuario);
+        $datasDAO->update($datas, $servico->id);
 
-        foreach ($servicos as $servico) {
-            $servico->tipo = $tipoDAO->getById($servico->idTipo);
-            $servico->datasDisponiveis = $datasDAO->findByIdServicoParaVenda($servico->id);
-            $servico->nomePrestador = $usuarioDAO->getNameById($servico->idPrestador);
-        }
+        $servico = getServicoById($servico->id);
+        $_SESSION["servico"] = $servico;
+        $_SESSION["sucessos"][] = "Serviço atualizado com sucesso";
+        header("Location: controllerTipo.php?opcao=2");
+    } catch (Exception $e) {
+        $_SESSION["erros"][] = "Erro ao atualizar serviço";
+        header("Location: controllerTipo.php?opcao=2");
+    }
+} elseif ($opcao == 5) { // excluir
+    session_start();
+    $servicoDAO->delete($_REQUEST["id"]);
 
-        $_SESSION["servicos"] = $servicos;
-        header("Location: controllerCarrinho.php?opcao=" . $opcaoRedirecionamento);
-        break;
-    case 7: // buscar por termo
-        session_start();
-        $busca = $_REQUEST["busca"];
-        $idUsuario = 0;
+    $_SESSION["sucessos"][] = "Serviço excluído com sucesso!";
 
-        if (isset($_SESSION["usuario"])) {
-            $idUsuario = $_SESSION["usuario"]->id;
-        }
+    if (isset($_SESSION["usuario"]) && $_SESSION["usuario"]->tipo == 'A') {
+        header("Location: controllerServico.php?opcao=10");
+    } else {
+        header("Location: controllerServico.php?opcao=1");
+    }
+} elseif ($opcao == 6) { // buscar todos
+    session_start();
+    $idUsuario = 0;
 
-        $servicos = $servicoDAO->find($busca, $idUsuario);
+    if (isset($_SESSION["usuario"])) {
+        $idUsuario = $_SESSION["usuario"]->id;
+    }
 
-        foreach ($servicos as $servico) {
-            $servico->tipo = $tipoDAO->getById($servico->idTipo);
-            $servico->datasDisponiveis = $datasDAO->findByIdServicoParaVenda($servico->id);
-            $servico->nomePrestador = $usuarioDAO->getNameById($servico->idPrestador);
-        }
+    $opcaoRedirecionamento = $_REQUEST["opcao_redirecionamento"] ?? 1;
+    $servicos = $servicoDAO->getAll($idUsuario);
 
-        $_SESSION["servicos"] = $servicos;
-        $_SESSION["busca"] = $busca;
+    foreach ($servicos as $servico) {
+        $servico->tipo = $tipoDAO->getById($servico->idTipo);
+        $servico->datasDisponiveis = $datasDAO->findByIdServicoParaVenda($servico->id);
+        $servico->nomePrestador = $usuarioDAO->getNameById($servico->idPrestador);
+    }
 
-        header("Location: controllerCarrinho.php?opcao=1");
-        break;
+    $_SESSION["servicos"] = $servicos;
+    header("Location: controllerCarrinho.php?opcao=" . $opcaoRedirecionamento);
+} elseif ($opcao == 7) { // buscar por termo
+    session_start();
+    $busca = $_REQUEST["busca"];
+    $idUsuario = 0;
 
-    case 8: // marca como serviço prestado
-        session_start();
-        $datasDAO->marcarComoPrestado($_REQUEST["id"]);
-        header("Location: controllerVenda.php?opcao=4");
-        break;
+    if (isset($_SESSION["usuario"])) {
+        $idUsuario = $_SESSION["usuario"]->id;
+    }
 
-    case 10: // buscar todos para admin
-        session_start();
+    $servicos = $servicoDAO->find($busca, $idUsuario);
 
-        if (!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo != 'A') {
-            header("Location: ../controllers/controllerUsuario.php?opcao=2");
-        }
+    foreach ($servicos as $servico) {
+        $servico->tipo = $tipoDAO->getById($servico->idTipo);
+        $servico->datasDisponiveis = $datasDAO->findByIdServicoParaVenda($servico->id);
+        $servico->nomePrestador = $usuarioDAO->getNameById($servico->idPrestador);
+    }
 
-        $servicos = $servicoDAO->getAllToAdmin();
+    $_SESSION["servicos"] = $servicos;
+    $_SESSION["busca"] = $busca;
 
-        foreach ($servicos as $servico) {
-            $servico->tipo = $tipoDAO->getById($servico->idTipo);
-            $servico->datasDisponiveis = $datasDAO->findByIdServico($servico->id);
-            $servico->nomePrestador = $usuarioDAO->getNameById($servico->idPrestador);
-            $servico->possuiServicoAFazer = possuiServicoAFazer($servico->datasDisponiveis);
-        }
+    header("Location: controllerCarrinho.php?opcao=1");
+} elseif ($opcao == 8) { // marca como serviço prestado
+    session_start();
+    $datasDAO->marcarComoPrestado($_REQUEST["id"]);
+    header("Location: controllerVenda.php?opcao=4");
+} elseif ($opcao == 10) { // buscar todos para admin
+    session_start();
 
-        $_SESSION["servicos"] = $servicos;
-        header("Location: ../views/exibirServicosAdmin.php");
-        break;
+    if (!isset($_SESSION["usuario"]) || $_SESSION["usuario"]->tipo != 'A') {
+        header("Location: ../controllers/controllerUsuario.php?opcao=2");
+    }
+
+    $servicos = $servicoDAO->getAllToAdmin();
+
+    foreach ($servicos as $servico) {
+        $servico->tipo = $tipoDAO->getById($servico->idTipo);
+        $servico->datasDisponiveis = $datasDAO->findByIdServico($servico->id);
+        $servico->nomePrestador = $usuarioDAO->getNameById($servico->idPrestador);
+        $servico->possuiServicoAFazer = possuiServicoAFazer($servico->datasDisponiveis);
+    }
+
+    $_SESSION["servicos"] = $servicos;
+    header("Location: ../views/exibirServicosAdmin.php");
 }
 
 function possuiServicoAFazer($datasDisponiveis)

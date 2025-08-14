@@ -19,110 +19,103 @@ $vendaDAO = new VendaDAO();
 $datasDAO = new DataDisponivelDAO();
 $servicoDAO = new ServicoDAO();
 
-switch ($opcao) {
-    case 1: // inserir
-        session_start();
-        $venda = new Venda(
-            $_SESSION["usuario"]->id,
-            $_SESSION["soma"],
-            $_REQUEST["pag"]
-        );
+if ($opcao == 1) { // inserir
+    session_start();
+    $venda = new Venda(
+        $_SESSION["usuario"]->id,
+        $_SESSION["soma"],
+        $_REQUEST["pag"]
+    );
 
-        $id_venda = $vendaDAO->insert($venda);
+    $id_venda = $vendaDAO->insert($venda);
 
-        foreach ($_SESSION["carrinho"] as $item) {
-            foreach ($item->getDatas() as $data) {
-                $datasDAO->vendaEfetuada($data->id, $id_venda);
-            }
+    foreach ($_SESSION["carrinho"] as $item) {
+        foreach ($item->getDatas() as $data) {
+            $datasDAO->vendaEfetuada($data->id, $id_venda);
         }
+    }
 
-        $_SESSION["carrinho"] = [];
+    $_SESSION["carrinho"] = [];
 
-        $_SESSION["sucessos"][] = "Compra realizada com sucesso!";
-        header("Location: ../views/exibirCarrinho.php");
-        break;
-    case 2: // verificar autenticação
-        session_start();
+    $_SESSION["sucessos"][] = "Compra realizada com sucesso!";
+    header("Location: ../views/exibirCarrinho.php");
+} elseif ($opcao == 2) { // verificar autenticação
+    session_start();
 
-        if (isset($_SESSION["usuario"])) {
-            header("Location: ../views/dadosCompra.php");
-        } else {
-            header("Location: ../views/formUsuarioLogin.php?em_compra=1");
+    if (isset($_SESSION["usuario"])) {
+        header("Location: ../views/dadosCompra.php");
+    } else {
+        header("Location: ../views/formUsuarioLogin.php?em_compra=1");
+    }
+} elseif ($opcao == 3) { // buscar serviços vendidos
+    session_start();
+    $idUsuario = $_SESSION["usuario"]->id;
+
+    $vendas = $vendaDAO->getAllVendidosByIdUsuario($idUsuario);
+
+    foreach ($vendas as $venda) {
+        $servicos = $servicoDAO->getAllVendidosByIdVendaIdPerstador($venda->id, $idUsuario);
+
+        $datas = [];
+        foreach ($servicos as $servico) {
+            $datas = $datasDAO->findAllByIdServicoIdVenda($servico->id, $venda->id);
+
+            $item = new item($servico);
+            $item->addDatas($datas);
+
+            $venda->addItem($item);
         }
-        break;
-    case 3: // buscar serviços vendidos
-        session_start();
-        $idUsuario = $_SESSION["usuario"]->id;
+    }
 
-        $vendas = $vendaDAO->getAllVendidosByIdUsuario($idUsuario);
+    $_SESSION["vendas_feitas"] = $vendas;
 
-        foreach ($vendas as $venda) {
-            $servicos = $servicoDAO->getAllVendidosByIdVendaIdPerstador($venda->id, $idUsuario);
+    header("Location: ../views/exibirServicosVendidos.php");
+} elseif ($opcao == 4) { // buscar serviços contratados
+    session_start();
+    $idUsuario = $_SESSION["usuario"]->id;
 
-            $datas = [];
-            foreach ($servicos as $servico) {
-                $datas = $datasDAO->findAllByIdServicoIdVenda($servico->id, $venda->id);
+    $vendas = $vendaDAO->getAllContratadosByIdUsuario($idUsuario);
 
-                $item = new item($servico);
-                $item->addDatas($datas);
+    foreach ($vendas as $venda) {
+        $servicos = $servicoDAO->getAllContratadosByIdVenda($venda->id);
 
-                $venda->addItem($item);
-            }
+        $datas = [];
+
+        foreach ($servicos as $servico) {
+            $datas = $datasDAO->findAllByIdServicoIdVenda($servico->id, $venda->id);
+
+            $item = new item($servico);
+            $item->addDatas($datas);
+
+            $venda->addItem($item);
         }
+    }
 
-        $_SESSION["vendas_feitas"] = $vendas;
+    $_SESSION["vendas_feitas"] = $vendas;
 
-        header("Location: ../views/exibirServicosVendidos.php");
-        break;
+    header("Location: ../views/exibirServicosContratados.php");
+} elseif ($opcao == 10) { // buscar todos os serviços vendidos para administrador visualizar serviços vendidos
+    session_start();
+    $idUsuario = $_SESSION["usuario"]->id;
 
-    case 4: // buscar serviços contratados
-        session_start();
-        $idUsuario = $_SESSION["usuario"]->id;
+    $vendas = $vendaDAO->getAllVendidos();
 
-        $vendas = $vendaDAO->getAllContratadosByIdUsuario($idUsuario);
+    foreach ($vendas as $venda) {
+        $servicos = $servicoDAO->getAllContratadosByIdVenda($venda->id);
 
-        foreach ($vendas as $venda) {
-            $servicos = $servicoDAO->getAllContratadosByIdVenda($venda->id);
+        $datas = [];
 
-            $datas = [];
+        foreach ($servicos as $servico) {
+            $datas = $datasDAO->findAllByIdServicoIdVenda($servico->id, $venda->id);
 
-            foreach ($servicos as $servico) {
-                $datas = $datasDAO->findAllByIdServicoIdVenda($servico->id, $venda->id);
+            $item = new item($servico);
+            $item->addDatas($datas);
 
-                $item = new item($servico);
-                $item->addDatas($datas);
-
-                $venda->addItem($item);
-            }
+            $venda->addItem($item);
         }
+    }
 
-        $_SESSION["vendas_feitas"] = $vendas;
+    $_SESSION["vendas_feitas"] = $vendas;
 
-        header("Location: ../views/exibirServicosContratados.php");
-        break;
-    case 10: // buscar todos os serviços vendidos para administrador visualizar serviços vendidos
-        session_start();
-        $idUsuario = $_SESSION["usuario"]->id;
-
-        $vendas = $vendaDAO->getAllVendidos();
-
-        foreach ($vendas as $venda) {
-            $servicos = $servicoDAO->getAllContratadosByIdVenda($venda->id);
-
-            $datas = [];
-
-            foreach ($servicos as $servico) {
-                $datas = $datasDAO->findAllByIdServicoIdVenda($servico->id, $venda->id);
-
-                $item = new item($servico);
-                $item->addDatas($datas);
-
-                $venda->addItem($item);
-            }
-        }
-
-        $_SESSION["vendas_feitas"] = $vendas;
-
-        header("Location: ../views/exibirServicosVendidos.php");
-        break;
+    header("Location: ../views/exibirServicosVendidos.php");
 }

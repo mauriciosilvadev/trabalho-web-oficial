@@ -56,7 +56,7 @@ if (sizeof($carrinho) == 0) {
                             </th>
                             <th>
                                 <i class="fas fa-info-circle me-1"></i>
-                                Descrição
+                                Nome
                             </th>
                             <th>
                                 <i class="fas fa-user me-1"></i>
@@ -95,7 +95,7 @@ if (sizeof($carrinho) == 0) {
                         ?>
                                 <tr class="align-middle" style="text-align: center">
                                     <td class="fw-bold"><?= $contador ?></td>
-                                    <td class="text-start"><?= $servico->descricao ?></td>
+                                    <td class="text-start"><?= $servico->nome ?></td>
                                     <td><?= $servico->nomePrestador ?></td>
                                     <td><?= $servico->cidade ?></td>
                                     <td><?= formatarData($data->data) ?></td>

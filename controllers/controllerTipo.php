@@ -8,17 +8,18 @@ if (isset($_REQUEST["opcao"]) && is_numeric($_REQUEST["opcao"])) {
 }
 
 $tipoDAO = new TipoDAO();
-switch ($opcao) {
-    case 1: // buscar todos
-    case 2:
-        $tipos = $tipoDAO->getAll();
+if ($opcao == 1) { // buscar todos
+    session_start();
+    $tipos = $tipoDAO->getAll();
+    $_SESSION["tipos"] = $tipos;
 
-        session_start();
-        $_SESSION["tipos"] = $tipos;
+    header("Location: ../views/cadastrarServico.php");
+} elseif ($opcao == 2) { // buscar todos para editar
+    session_start();
+    $tipos = $tipoDAO->getAll();
+    $_SESSION["tipos"] = $tipos;
 
-        if ($opcao == 1) header("Location: ../views/formServico.php");
-        else header("Location: ../views/formServicoAtualizar.php");
-        break;
-    default:
-        break;
+    header("Location: ../views/editarServico.php");
+} else {
+    header("Location: ../views/index.php");
 }
