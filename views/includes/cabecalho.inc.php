@@ -10,7 +10,7 @@
 </head>
 
 <body class="bg-light">
-  <header class="bg-primary bg-gradient shadow-sm mb-4">
+  <!-- <header class="bg-primary bg-gradient shadow-sm mb-4">
     <div class="container">
       <div class="row align-items-center py-3">
         <div class="col-md-6">
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-  </header>
+  </header> -->
 
   <div class="container">
     <?php

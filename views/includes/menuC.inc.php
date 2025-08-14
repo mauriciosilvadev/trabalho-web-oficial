@@ -56,7 +56,7 @@ $usuario = $_SESSION["usuario"];
             </li>
             <li><hr class="dropdown-divider"></li>
             <li>
-              <a class="dropdown-item text-danger" href="../controllers/controllerUsuario.php?opcao=2">
+              <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <i class="fas fa-sign-out-alt me-2"></i>
                 Sair
               </a>

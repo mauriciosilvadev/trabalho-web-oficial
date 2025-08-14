@@ -14,77 +14,148 @@ if (isset($_SESSION["carrinho"])) {
 
 ?>
 
-<h1 class="text-center">Carrinho de compra</h1>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="text-center mb-4">
+                <h1 class="h3 text-primary">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    Meu Carrinho
+                </h1>
+                <p class="text-muted">Revise seus serviços selecionados</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php include_once "includes/mensagens.inc.php" ?>
-<p>
-    <?php
-    if (sizeof($carrinho) == 0) {
-        include_once 'includes/carrinhoVazio.inc.php';
-        $_SESSION["soma"] = 0;
-    } else {
 
-    ?>
-<div class="table-responsive">
-    <table class="table table-ligth table-striped">
-        <thead class="table-danger">
-            <tr class="align-middle" style="text-align: center">
-                <th witdh="10%">Nº</th>
-                <th>Descricao</th>
-                <th>Prestador</th>
-                <th>Cidade</th>
-                <th>Data</th>
-                <th>Valor</th>
-                <th>Remover</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
-            <?php
-            $contador = 0;
-            $soma = 0;
-            foreach ($carrinho as $item) {
-                $servico = $item->getServico();
-                if ($servico === null) {
-                    continue;
-                }
-                foreach ($item->getDatas() as $data) {
-                    $contador++;
-                    $soma += $servico->valor;
-            ?>
-                    <tr class="align-middle" style="text-align: center">
-                        <td><?= $contador ?></td>
-                        <td><?= $servico->descricao ?></td>
-                        <td><?= $servico->nomePrestador ?></td>
-                        <td><?= $servico->cidade ?></td>
-                        <td><?= formatarData($data->data) ?></td>
-                        <td>R$ <?= number_format($servico->valor, 2, ",", ".") ?></td>
-                        <td><a href="../controllers/controllerCarrinho.php?opcao=4&id_servico=<?= $servico->id ?>&id_data=<?= $data->id ?>" class='btn btn-danger btn-sm'>X</a></td>
-                    </tr>
+<?php
+if (sizeof($carrinho) == 0) {
+    include_once 'includes/carrinhoVazio.inc.php';
+    $_SESSION["soma"] = 0;
+} else {
+?>
 
-            <?php }
-            } ?>
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+                <i class="fas fa-list me-2"></i>
+                Itens no Carrinho
+                <span class="badge bg-light text-primary ms-2"><?= sizeof($carrinho) ?></span>
+            </h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr class="align-middle text-center">
+                            <th width="8%">
+                                <i class="fas fa-hashtag"></i>
+                                Nº
+                            </th>
+                            <th>
+                                <i class="fas fa-info-circle me-1"></i>
+                                Descrição
+                            </th>
+                            <th>
+                                <i class="fas fa-user me-1"></i>
+                                Prestador
+                            </th>
+                            <th>
+                                <i class="fas fa-map-marker-alt me-1"></i>
+                                Cidade
+                            </th>
+                            <th>
+                                <i class="fas fa-calendar me-1"></i>
+                                Data
+                            </th>
+                            <th>
+                                <i class="fas fa-dollar-sign me-1"></i>
+                                Valor
+                            </th>
+                            <th width="10%">
+                                <i class="fas fa-trash me-1"></i>
+                                Ação
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        <?php
+                        $contador = 0;
+                        $soma = 0;
+                        foreach ($carrinho as $item) {
+                            $servico = $item->getServico();
+                            if ($servico === null) {
+                                continue;
+                            }
+                            foreach ($item->getDatas() as $data) {
+                                $contador++;
+                                $soma += $servico->valor;
+                        ?>
+                                <tr class="align-middle" style="text-align: center">
+                                    <td class="fw-bold"><?= $contador ?></td>
+                                    <td class="text-start"><?= $servico->descricao ?></td>
+                                    <td><?= $servico->nomePrestador ?></td>
+                                    <td><?= $servico->cidade ?></td>
+                                    <td><?= formatarData($data->data) ?></td>
+                                    <td class="fw-bold text-success">R$ <?= number_format($servico->valor, 2, ",", ".") ?></td>
+                                    <td>
+                                        <a href="../controllers/controllerCarrinho.php?opcao=4&id_servico=<?= $servico->id ?>&id_data=<?= $data->id ?>"
+                                            class="btn btn-outline-danger btn-sm"
+                                            title="Remover item"
+                                            onclick="return confirm('Deseja remover este item do carrinho?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
 
-            <tr align="right">
-                <td colspan="8">
-                    <font face="Verdana" size="4" color="red"><b>Valor Total = <?= number_format($soma, 2, ",", ".") ?></b></font>
-                </td>
-            </tr>
-    </table>
-    <div class="container text-center">
-        <div class="row">
-            <div class="col">
-                <a class="btn btn-warning" role="button" href="../controllers/controllerServico.php?opcao=6&opcao_redirecionamento=1"><b>Continuar comprando</b></a>
+                        <?php }
+                        } ?>
+
+                    </tbody>
+                </table>
             </div>
-            <div class="col">
-                <a class="btn btn-danger" role="button" href="../controllers/controllerCarrinho.php?opcao=5"><b>Esvaziar carrinho</b></a>
+            <div class="card-footer bg-light">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h4 class="mb-0 text-primary">
+                            <i class="fas fa-calculator me-2"></i>
+                            Total: <span class="text-success fw-bold">R$ <?= number_format($soma, 2, ",", ".") ?></span>
+                        </h4>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <small class="text-muted"><?= $contador ?> item(ns) no carrinho</small>
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <a class="btn btn-success" role="button" href="../controllers/controllerVenda.php?opcao=2"><b>Finalizar compra</b></a>
+        </div>
+
+    </div>
+
+    <div class="row mt-4 mb-4">
+        <div class="col-12">
+            <div class="d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center">
+                <a class="btn btn-outline-primary btn-lg shadow-sm" href="../controllers/controllerServico.php?opcao=6&opcao_redirecionamento=1">
+                    <i class="fas fa-shopping-bag me-2"></i>
+                    Continuar Comprando
+                </a>
+                <a class="btn btn-outline-warning btn-lg shadow-sm" href="../controllers/controllerCarrinho.php?opcao=5"
+                    onclick="return confirm('⚠️ Deseja realmente esvaziar todo o carrinho?')">
+                    Limpar Carrinho
+                </a>
+                <a class="btn btn-success btn-lg shadow fw-bold" href="../controllers/controllerVenda.php?opcao=2">
+                    <i class="fas fa-credit-card me-2"></i>
+                    Finalizar Compra
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
     </div>
 
 <?php
-        $_SESSION["soma"] = $soma;
-    }
-    require_once 'includes/rodape.inc.php';
+    $_SESSION["soma"] = $soma;
+}
 ?>
+
+<?php require_once 'includes/rodape.inc.php'; ?>

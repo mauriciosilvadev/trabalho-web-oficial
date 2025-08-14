@@ -3,7 +3,7 @@
 $usuario = $_SESSION["usuario"];
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
   <div class="container">
     <a href="index.php" class="navbar-brand d-flex align-items-center">
       <img src="imagens/logo2.png" alt="Logo" class="me-2" style="height: 40px;">
@@ -37,7 +37,7 @@ $usuario = $_SESSION["usuario"];
             </li>
           </ul>
         </li>
-        
+
         <li class="nav-item">
           <a href="../controllers/controllerUsuario.php?opcao=10" class="nav-link fw-semibold">
             <i class="fas fa-users me-1"></i>
@@ -54,14 +54,14 @@ $usuario = $_SESSION["usuario"];
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item text-danger" href="../controllers/controllerUsuario.php?opcao=2">
+              <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <i class="fas fa-sign-out-alt me-2"></i>
                 Sair
               </a>
             </li>
           </ul>
         </div>
-        
+
         <?php include_once "modal.inc.php"; ?>
       </div>
     </div>

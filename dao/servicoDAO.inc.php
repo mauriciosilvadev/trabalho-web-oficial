@@ -164,7 +164,7 @@ final class ServicoDAO
         return ServicoDAO::assocsToServicos($servicosAssoc);
     }
 
-    public function find($busca): array
+    public function find($busca, $idUsuario = 0): array
     {
         $sql = $this->conn->prepare("
         SELECT 
@@ -180,10 +180,15 @@ final class ServicoDAO
         ON s.id = d.id_servico
         INNER JOIN tipos t
         ON s.id_tipo = t.id
+        INNER JOIN usuarios u
+        ON s.id_prestador = u.id
         WHERE 
             s.esta_deletado = 0 AND
             d.disponivel = 1 AND
-            d.data > CURRENT_DATE AND " .
+            d.data > CURRENT_DATE AND
+            s.id_prestador != :idUsuario AND
+            u.tipo = 'P' AND
+            u.esta_deletado = 0 AND " .
             (is_numeric($busca) ? "s.valor = :busca" : "
             (
                 s.nome LIKE :busca OR
@@ -198,6 +203,7 @@ final class ServicoDAO
         }
 
         $sql->bindParam(":busca", $busca);
+        $sql->bindParam(":idUsuario", $idUsuario);
         $sql->execute();
 
         $servicosAssoc = $sql->fetchAll(PDO::FETCH_ASSOC);

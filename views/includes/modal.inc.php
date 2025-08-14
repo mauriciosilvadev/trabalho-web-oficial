@@ -1,11 +1,4 @@
 <!-- Modal de Logout -->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">
-  <i class="fas fa-sign-out-alt me-1"></i>
-  Sair
-</button>
-
-<!-- Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow">

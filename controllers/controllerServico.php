@@ -141,8 +141,13 @@ switch ($opcao) {
     case 7: // buscar por termo
         session_start();
         $busca = $_REQUEST["busca"];
+        $idUsuario = 0;
 
-        $servicos = $servicoDAO->find($busca);
+        if (isset($_SESSION["usuario"])) {
+            $idUsuario = $_SESSION["usuario"]->id;
+        }
+
+        $servicos = $servicoDAO->find($busca, $idUsuario);
 
         foreach ($servicos as $servico) {
             $servico->tipo = $tipoDAO->getById($servico->idTipo);
