@@ -188,9 +188,8 @@ $tamanhoMaxNome = 50;
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
 
-                <!-- Botão de ação -->
                 <div class="mt-auto">
-                  <button id="btn-contratar-<?= $servico->id ?>" class="btn btn-success w-100 btn-lg" type="submit" disabled>
+                  <button id="btn-contratar-<?= $servico->id ?>" class="btn btn-success w-100 btn-lg" type="submit">
                     <i class="fas fa-shopping-cart me-2"></i>
                     Contratar Serviço
                   </button>
@@ -228,16 +227,12 @@ $tamanhoMaxNome = 50;
         botao.classList.remove('btn-secondary');
         botao.classList.add('btn-success');
         mensagem.style.display = 'none';
-      } else {
-        botao.disabled = true;
-        botao.classList.remove('btn-success');
-        botao.classList.add('btn-secondary');
-        mensagem.style.display = 'block';
       }
     }
 
     function validarSelecaoDatas(servicoId) {
       const checkboxes = document.querySelectorAll('.data-checkbox-' + servicoId);
+      const mensagem = document.getElementById('msg-validacao-' + servicoId);
       let algumSelecionado = false;
 
       checkboxes.forEach(function(checkbox) {
@@ -247,7 +242,12 @@ $tamanhoMaxNome = 50;
       });
 
       if (!algumSelecionado) {
-        alert('Por favor, selecione pelo menos uma data para contratar o serviço.');
+        mensagem.style.display = 'block';
+
+        setTimeout(function() {
+          mensagem.style.display = 'none';
+        }, 2000);
+
         return false;
       }
 
