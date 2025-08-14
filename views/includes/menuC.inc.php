@@ -6,7 +6,7 @@ $usuario = $_SESSION["usuario"];
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 w-100">
   <div class="container">
     <a href="index.php" class="navbar-brand d-flex align-items-center">
-      <img src="imagens/loucos-por-servico.png" alt="Loucos por Serviços" height="60" class="me-2">
+      <img src="imagens/loucos-por-servico.png" alt="Loucos por Serviços" height="80" class="me-2">
       <span class="fw-bold text-primary">Loucos por Serviços</span>
     </a>
 
