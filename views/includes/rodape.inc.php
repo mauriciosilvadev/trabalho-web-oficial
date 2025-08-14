@@ -1,78 +1,93 @@
-<footer class="bg-light text-light mt-5">
+</div>
+<footer class="bg-dark text-light mt-5 w-100">
   <div class="container">
-    <div class="row py-4">
+    <div class="row py-5">
       <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-        <h5 class="text-primary mb-3">
-          <i class="fas fa-store me-2"></i>
-          Loja Virtual Des Web
-        </h5>
-        <p class="text-muted mb-3">
-          Sistema de gerenciamento de serviços
-        </p>
-        <div class="d-flex">
-          <a href="#" class="btn btn-outline-primary btn-sm me-2">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" class="btn btn-outline-info btn-sm me-2">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#" class="btn btn-outline-danger btn-sm">
-            <i class="fab fa-instagram"></i>
-          </a>
+        <div class="mb-4">
+          <h4 class="text-white mb-3 fw-bold">
+            <i class="fas fa-store me-2 text-primary"></i>
+            Loja Virtual Des Web
+          </h4>
+          <p class="text-light mb-4 opacity-75">
+            Sistema de gerenciamento de serviços
+          </p>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-primary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="btn btn-info btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="btn btn-danger btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
         </div>
       </div>
 
-
-
-      <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-        <h6 class="text-uppercase fw-bold mb-3 text-muted">Contato</h6>
+      <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+        <h5 class="text-white fw-bold mb-4">
+          <i class="fas fa-address-book me-2 text-primary"></i>
+          Contato
+        </h5>
         <ul class="list-unstyled">
-          <li class="mb-2">
-            <i class="fas fa-map-marker-alt text-primary me-2"></i>
-            <span class="text-muted">Alegre, ES - Brasil</span>
+          <li class="mb-3 d-flex align-items-center">
+            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px; min-width: 35px;">
+              <i class="fas fa-map-marker-alt text-white"></i>
+            </div>
+            <span class="text-light opacity-75">Alegre, ES - Brasil</span>
           </li>
-          <li class="mb-2">
-            <i class="fas fa-envelope text-primary me-2"></i>
-            <span class="text-muted">contato@lojavirtual.com</span>
+          <li class="mb-3 d-flex align-items-center">
+            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px; min-width: 35px;">
+              <i class="fas fa-envelope text-white"></i>
+            </div>
+            <span class="text-light opacity-75">contato@lojavirtual.com</span>
           </li>
-          <li class="mb-2">
-            <i class="fas fa-phone text-primary me-2"></i>
-            <span class="text-muted">(28) 9999-9999</span>
+          <li class="mb-3 d-flex align-items-center">
+            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 35px; height: 35px; min-width: 35px;">
+              <i class="fas fa-phone text-white"></i>
+            </div>
+            <span class="text-light opacity-75">(28) 9999-9999</span>
           </li>
         </ul>
       </div>
 
-      <div class="col-lg-3 col-md-6">
-        <h6 class="text-uppercase fw-bold mb-3 text-muted">Horário de Funcionamento</h6>
-        <ul class="list-unstyled">
-          <li class="mb-2">
-            <i class="fas fa-clock text-primary me-2"></i>
-            <span class="text-muted">Segunda - Sexta: 8h às 18h</span>
-          </li>
-          <li class="mb-2">
-            <i class="fas fa-clock text-primary me-2"></i>
-            <span class="text-muted">Sábado: 8h às 12h</span>
-          </li>
-          <li class="mb-2">
-            <i class="fas fa-times text-danger me-2"></i>
-            <span class="text-muted">Domingo: Fechado</span>
-          </li>
-        </ul>
+      <div class="col-lg-4 col-md-12">
+        <h5 class="text-white fw-bold mb-4">
+          <i class="fas fa-clock me-2 text-primary"></i>
+          Horário de Funcionamento
+        </h5>
+        <div class="bg-secondary bg-opacity-25 rounded p-3">
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2 d-flex justify-content-between align-items-center">
+              <span class="text-light opacity-75">Segunda - Sexta</span>
+              <span class="badge bg-success">8h às 18h</span>
+            </li>
+            <li class="mb-2 d-flex justify-content-between align-items-center">
+              <span class="text-light opacity-75">Sábado</span>
+              <span class="badge bg-warning">8h às 12h</span>
+            </li>
+            <li class="d-flex justify-content-between align-items-center">
+              <span class="text-light opacity-75">Domingo</span>
+              <span class="badge bg-danger">Fechado</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <hr class="border-secondary">
+    <hr class="border-light border-opacity-25 my-4">
 
     <div class="row py-3">
-      <div class="col-md-6">
-        <p class="mb-0 text-muted">
-          <i class="fas fa-copyright me-1"></i>
+      <div class="col-md-6 mb-2 mb-md-0">
+        <p class="mb-0 text-light opacity-75 d-flex align-items-center">
+          <i class="fas fa-copyright me-2 text-primary"></i>
           2025 DComp - UFES, Alegre ES. Todos os direitos reservados.
         </p>
       </div>
       <div class="col-md-6 text-md-end">
-        <p class="mb-0 text-muted">
-          <i class="fas fa-code me-1"></i>
+        <p class="mb-0 text-light opacity-75 d-flex align-items-center justify-content-md-end">
+          <i class="fas fa-code me-2 text-primary"></i>
           Desenvolvido por Rayssa, Mariana, Artur e Maurício
         </p>
       </div>

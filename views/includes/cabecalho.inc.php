@@ -9,36 +9,18 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-light">
-  <!-- <header class="bg-primary bg-gradient shadow-sm mb-4">
-    <div class="container">
-      <div class="row align-items-center py-3">
-        <div class="col-md-6">
-          <h1 class="h3 text-white mb-0 fw-bold">
-            <i class="fas fa-store me-2"></i>
-            Loja Virtual Des Web
-          </h1>
-        </div>
-        <div class="col-md-6 text-md-end">
-          <small class="text-white-50">
-            <i class="fas fa-clock me-1"></i>
-            Sistema de Serviços Online
-          </small>
-        </div>
-      </div>
-    </div>
-  </header> -->
+<body class="bg-light d-flex flex-column min-vh-100">
+  <?php
+  require_once "../classes/usuario.inc.php";
+  session_start();
 
-  <div class="container">
-    <?php
-    require_once "../classes/usuario.inc.php";
-    session_start();
+  $menu = "V";
 
-    $menu = "V";
+  if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] instanceof Usuario) {
+    $menu = $_SESSION["usuario"]->tipo;
+  }
 
-    if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] instanceof Usuario) {
-      $menu = $_SESSION["usuario"]->tipo;
-    }
+  require_once "menu$menu.inc.php";
+  ?>
 
-    require_once "menu$menu.inc.php";
-    ?>
+  <div class="container flex-grow-1">

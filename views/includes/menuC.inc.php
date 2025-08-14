@@ -3,7 +3,7 @@
 $usuario = $_SESSION["usuario"];
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 w-100">
   <div class="container">
     <a href="index.php" class="navbar-brand d-flex align-items-center">
       <span class="fw-bold text-primary">Serviços</span>
