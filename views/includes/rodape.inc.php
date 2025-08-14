@@ -4,9 +4,9 @@
     <div class="row py-5">
       <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
         <div class="mb-4">
-          <h4 class="text-white mb-3 fw-bold">
-            <i class="fas fa-store me-2 text-primary"></i>
-            Loja Virtual Des Web
+          <h4 class="text-white mb-3 fw-bold d-flex align-items-center">
+            <img src="imagens/loucos-por-servico.png" alt="Loucos por Serviços" height="100" class="me-2">
+            Loucos por Serviços
           </h4>
           <p class="text-light mb-4 opacity-75">
             Sistema de gerenciamento de serviços

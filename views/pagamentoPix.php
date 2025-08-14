@@ -8,7 +8,7 @@ if (!isset($_SESSION["soma"]) || !isset($_SESSION["carrinho"])) {
 
 $valorTotal = $_SESSION["soma"];
 $chavePixEmpresa = "mauricio.s.souze@edu.ufes";
-$nomeEmpresa = "Loja Virtual Des Web";
+$nomeEmpresa = "Loucos por Serviços";
 $cidadeEmpresa = "Alegre";
 $identificadorTransacao = "TXN" . date("YmdHis") . rand(1000, 9999);
 ?>

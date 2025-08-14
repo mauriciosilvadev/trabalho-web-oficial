@@ -7,7 +7,7 @@ if (!isset($_SESSION["soma"]) || !isset($_SESSION["carrinho"])) {
 }
 
 $valorTotal = $_SESSION["soma"];
-$nomeEmpresa = "Loja Virtual Des Web";
+$nomeEmpresa = "Loucos por Serviços";
 $cnpjEmpresa = "12.345.678/0001-90";
 $enderecoEmpresa = "Rua das Flores, 123 - Alegre/ES";
 $numeroBoleto = date("Y") . date("m") . date("d") . rand(100000, 999999);
