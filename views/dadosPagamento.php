@@ -25,7 +25,7 @@ require_once 'includes/cabecalho.inc.php';
                 </h5>
             </div>
             <div class="card-body p-4">
-                <form action="../controllers/controllerVenda.php" method="get">
+                <form id="formPagamento" action="../controllers/controllerVenda.php" method="get">
                     <div class="row g-3">
 
                         <!-- Boleto Bancário -->
@@ -97,7 +97,7 @@ require_once 'includes/cabecalho.inc.php';
                     <input type="hidden" value="1" name="opcao">
 
                     <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-success btn-lg px-5">
+                        <button type="button" class="btn btn-success btn-lg px-5" onclick="processarPagamento()">
                             <i class="fas fa-check me-2"></i>
                             Confirmar Pagamento
                         </button>
@@ -130,6 +130,36 @@ require_once 'includes/cabecalho.inc.php';
         cursor: pointer;
     }
 </style>
+
+<script>
+function processarPagamento() {
+    const formaPagamento = document.querySelector('input[name="pag"]:checked');
+    
+    if (!formaPagamento) {
+        alert('Por favor, selecione uma forma de pagamento.');
+        return;
+    }
+    
+    const valorPagamento = formaPagamento.value;
+    
+    // Redirecionar para páginas específicas de pagamento
+    switch(valorPagamento) {
+        case 'pix':
+            window.location.href = 'pagamentoPix.php';
+            break;
+        case 'boleto':
+            window.location.href = 'pagamentoBoleto.php';
+            break;
+        case 'crédito':
+        case 'debito':
+            // Para cartão, processar diretamente
+            window.location.href = '../controllers/controllerVenda.php?opcao=1&pag=' + valorPagamento;
+            break;
+        default:
+            alert('Forma de pagamento não reconhecida.');
+    }
+}
+</script>
 <?php
 require_once('includes/rodape.inc.php');
 ?>
