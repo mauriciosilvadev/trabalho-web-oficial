@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
   <div class="container">
     <a href="index.php" class="navbar-brand d-flex align-items-center">
-      <span class="fw-bold text-primary">Loja Serviços</span>
+      <span class="fw-bold text-primary">Serviços</span>
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

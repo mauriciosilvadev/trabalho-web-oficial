@@ -44,38 +44,6 @@ require_once 'includes/cabecalho.inc.php';
                             </div>
                         </div>
 
-                        <!-- Cartão de Crédito -->
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input d-none" type="radio" name="pag" value="crédito" id="credito">
-                                <label class="form-check-label w-100" for="credito">
-                                    <div class="card h-100 payment-option">
-                                        <div class="card-body text-center p-4">
-                                            <i class="fas fa-credit-card text-success" style="font-size: 2.5rem;"></i>
-                                            <h6 class="mt-3 mb-2">Cartão de Crédito</h6>
-                                            <small class="text-muted">Aprovação imediata</small>
-                                        </div>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Cartão de Débito -->
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input d-none" type="radio" name="pag" value="debito" id="debito">
-                                <label class="form-check-label w-100" for="debito">
-                                    <div class="card h-100 payment-option">
-                                        <div class="card-body text-center p-4">
-                                            <i class="fas fa-money-check-alt text-warning" style="font-size: 2.5rem;"></i>
-                                            <h6 class="mt-3 mb-2">Cartão de Débito</h6>
-                                            <small class="text-muted">Débito direto da conta</small>
-                                        </div>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
                         <!-- PIX -->
                         <div class="col-md-6">
                             <div class="form-check">
@@ -132,33 +100,33 @@ require_once 'includes/cabecalho.inc.php';
 </style>
 
 <script>
-function processarPagamento() {
-    const formaPagamento = document.querySelector('input[name="pag"]:checked');
-    
-    if (!formaPagamento) {
-        alert('Por favor, selecione uma forma de pagamento.');
-        return;
+    function processarPagamento() {
+        const formaPagamento = document.querySelector('input[name="pag"]:checked');
+
+        if (!formaPagamento) {
+            alert('Por favor, selecione uma forma de pagamento.');
+            return;
+        }
+
+        const valorPagamento = formaPagamento.value;
+
+        // Redirecionar para páginas específicas de pagamento
+        switch (valorPagamento) {
+            case 'pix':
+                window.location.href = 'pagamentoPix.php';
+                break;
+            case 'boleto':
+                window.location.href = 'pagamentoBoleto.php';
+                break;
+            case 'crédito':
+            case 'debito':
+                // Para cartão, processar diretamente
+                window.location.href = '../controllers/controllerVenda.php?opcao=1&pag=' + valorPagamento;
+                break;
+            default:
+                alert('Forma de pagamento não reconhecida.');
+        }
     }
-    
-    const valorPagamento = formaPagamento.value;
-    
-    // Redirecionar para páginas específicas de pagamento
-    switch(valorPagamento) {
-        case 'pix':
-            window.location.href = 'pagamentoPix.php';
-            break;
-        case 'boleto':
-            window.location.href = 'pagamentoBoleto.php';
-            break;
-        case 'crédito':
-        case 'debito':
-            // Para cartão, processar diretamente
-            window.location.href = '../controllers/controllerVenda.php?opcao=1&pag=' + valorPagamento;
-            break;
-        default:
-            alert('Forma de pagamento não reconhecida.');
-    }
-}
 </script>
 <?php
 require_once('includes/rodape.inc.php');
