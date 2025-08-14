@@ -54,6 +54,7 @@ if ($opcao == 1) { // Realiza o processo de autenticação do usuário
         $usuario = new Usuario(
             $_REQUEST["nome"],
             $_REQUEST["endereco"],
+            $_REQUEST["cidade"],
             $_REQUEST["telefone"],
             $_REQUEST["cpf_cnpj"],
             strtotime($_REQUEST["dt_nascimento"]),
@@ -96,6 +97,7 @@ if ($opcao == 1) { // Realiza o processo de autenticação do usuário
         $usuario = new Usuario(
             $_REQUEST["nome"],
             $_REQUEST["endereco"],
+            $_REQUEST["cidade"],
             $_REQUEST["telefone"],
             $_REQUEST["cpf_cnpj"],
             strtotime($_REQUEST["dt_nascimento"]),
@@ -187,6 +189,7 @@ if ($opcao == 1) { // Realiza o processo de autenticação do usuário
     $usuario = new Usuario(
         $_REQUEST["nome"],
         $_REQUEST["endereco"],
+        $_REQUEST["cidade"],
         $_REQUEST["telefone"],
         $_REQUEST["cpf_cnpj"],
         strtotime($_REQUEST["dt_nascimento"]),

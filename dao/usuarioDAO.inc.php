@@ -42,6 +42,7 @@ class UsuarioDAO
         return $this->decorator->insert([
             "nome" => $usuario->nome,
             "endereco" => $usuario->endereco,
+            "cidade" => $usuario->cidade,
             "telefone" => $usuario->telefone,
             "cpf_cnpj" => $usuario->cpf_cnpj,
             "dt_nascimento" => $data,
@@ -57,6 +58,7 @@ class UsuarioDAO
         $this->decorator->update(["id" => $usuario->id], [
             "nome" => $usuario->nome,
             "endereco" => $usuario->endereco,
+            "cidade" => $usuario->cidade,
             "telefone" => $usuario->telefone,
             "cpf_cnpj" => $usuario->cpf_cnpj,
             "dt_nascimento" => $data,
@@ -126,6 +128,7 @@ class UsuarioDAO
         $c = new Usuario(
             $data["nome"],
             $data["endereco"],
+            $data["cidade"],
             $data["telefone"],
             $data["cpf_cnpj"],
             strtotime($data["dt_nascimento"]),

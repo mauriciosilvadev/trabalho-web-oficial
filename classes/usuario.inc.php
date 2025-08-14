@@ -8,6 +8,7 @@ final class Usuario
     public function __construct(
         private string $nome,
         private string $endereco,
+        private string $cidade,
         private string $telefone,
         private string $cpf_cnpj,
         private int $dtNascimento,
@@ -33,7 +34,7 @@ final class Usuario
 
     public function __sleep()
     {
-        return ['id', 'possuiServicosFuturosAPrestar', 'possuiServicosFuturosContratados', 'nome', 'endereco', 'telefone', 'cpf_cnpj', 'dtNascimento', 'email', 'senha', 'tipo'];
+        return ['id', 'possuiServicosFuturosAPrestar', 'possuiServicosFuturosContratados', 'nome', 'endereco', 'cidade', 'telefone', 'cpf_cnpj', 'dtNascimento', 'email', 'senha', 'tipo'];
     }
 
     public function __wakeup()

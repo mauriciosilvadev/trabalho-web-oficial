@@ -14,6 +14,7 @@ $usuarios = $_SESSION['usuarios'];
                 <th witdh="10%">ID</th>
                 <th>Nome</th>
                 <th>Endereco</th>
+                <th>Cidade</th>
                 <th>Telefone</th>
                 <th>Email</th>
                 <th>Tipo</th>
@@ -29,6 +30,7 @@ $usuarios = $_SESSION['usuarios'];
                 echo "<td>" . $contadora . "</td>";
                 echo "<td><strong>" . $usuario->nome . "</strong></td>";
                 echo "<td class='text-truncate' style='max-width: 150px;'>" . $usuario->endereco . "</td>";
+                echo "<td>" . $usuario->cidade . "</td>";
                 echo "<td>" . $usuario->telefone . "</td>";
                 echo "<td>" . $usuario->email . "</td>";
                 echo "<td>" . $usuario->tipo . "</td>";

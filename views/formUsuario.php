@@ -32,6 +32,13 @@
                     <hr>
 
                     <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInputCidade" minlength="2" maxlength="50" placeholder="Nome da cidade" name="cidade" required>
+                        <label for="floatingInputCidade">Cidade</label>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInputTel" 
                             placeholder="Digite apenas números" name="telefone" maxlength="11" 
                             oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
