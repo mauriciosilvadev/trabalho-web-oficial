@@ -13,13 +13,13 @@ if ($opcao == 1) { // buscar todos
     $tipos = $tipoDAO->getAll();
     $_SESSION["tipos"] = $tipos;
 
-    header("Location: ../views/cadastrarServico.php");
+    header("Location: ../views/formServico.php");
 } elseif ($opcao == 2) { // buscar todos para editar
     session_start();
     $tipos = $tipoDAO->getAll();
     $_SESSION["tipos"] = $tipos;
 
-    header("Location: ../views/editarServico.php");
+    header("Location: ../views/formServicoAtualizar.php");
 } else {
     header("Location: ../views/index.php");
 }
