@@ -32,16 +32,18 @@
                     <hr>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputTel" oninput="validarTelefone(this)"
-                            placeholder="XX XXXXX-XXXX" name="telefone" required>
+                        <input type="text" class="form-control" id="floatingInputTel" 
+                            placeholder="Digite apenas números" name="telefone" maxlength="11" 
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                         <label for="floatingInputTel">Telefone</label>
                     </div>
 
                     <hr>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputCPF" oninput="validarCPF_CNPJ(this)"
-                            placeholder="XXX.XXX.XXX-XX" name="cpf_cnpj" required>
+                        <input type="text" class="form-control" id="floatingInputCPF" 
+                            placeholder="Digite apenas números" name="cpf_cnpj" maxlength="11"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                         <label for="floatingInputCPF">CPF ou CNPJ</label>
                     </div>
 
@@ -59,8 +61,10 @@
                     <hr>
 
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" minlength="4"
-                            maxlength="8" placeholder="Senha" name="senha" oninput="validarSenha()" required>
+                        <input type="password" class="form-control" id="floatingPassword" minlength="8"
+                            placeholder="Senha" name="senha" pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,}$"
+                            title="A senha deve conter no mínimo 8 caracteres, uma letra maiúscula, um caractere especial e um número"
+                            oninput="validarSenha()" required>
                         <label for="floatingPassword">Senha</label>
                     </div>
 

@@ -30,7 +30,7 @@ if ($usuario->tipo == "A") {
                     <div class="form-floating mb-3">
 
                         <input type="text" class="form-control" minlength="3" maxlength="50" id="floatingInputNome"
-                            placeholder="José" name="nome" value="<?= $usuario->nome ?>">
+                            placeholder="José" name="nome" value="<?= $usuario->nome ?>" required>
                         <label for="floatingInputNome">Nome</label>
                     </div>
 
@@ -38,7 +38,7 @@ if ($usuario->tipo == "A") {
 
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="floatingInputEmail" minlength="8" maxlength="50"
-                            placeholder="nome@exemplo.com" name="email" value="<?= $usuario->email ?>">
+                            placeholder="nome@exemplo.com" name="email" value="<?= $usuario->email ?>" required>
                         <label for="floatingInputEmail">Email</label>
                     </div>
 
@@ -46,32 +46,35 @@ if ($usuario->tipo == "A") {
 
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="floatingInputEndereco" minlength="5" maxlength="50"
-                            placeholder="rua, avenida, rodovia + nº" name="endereco" value="<?= $usuario->endereco ?>">
+                            placeholder="rua, avenida, rodovia + nº" name="endereco" value="<?= $usuario->endereco ?>" required>
                         <label for="floatingInputEndereco">Endereço</label>
                     </div>
 
                     <hr>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputTel" oninput="validarTelefone(this)"
-                            placeholder="XX XXXXX-XXXX" name="telefone"
-                            value="<?= $usuario->telefone ?>">
-                        <label for="floatingInputTel">Telefone (XX XXXXX-XXXX)</label>
+                        <input type="text" class="form-control" id="floatingInputTel" 
+                            placeholder="Digite apenas números" name="telefone" maxlength="11" 
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                            value="<?= $usuario->telefone ?>" required>
+                        <label for="floatingInputTel">Telefone</label>
                     </div>
 
                     <hr>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInputCPF" oninput="validarCPF_CNPJ(this)"
-                            value="<?= $usuario->cpf_cnpj ?>" placeholder="XXX.XXX.XXX-XX" name="cpf_cnpj" required>
-                        <label for="floatingInputCPF">CPF ou CNPJ (XXX.XXX.XXX-XX)</label>
+                        <input type="text" class="form-control" id="floatingInputCPF" 
+                            placeholder="Digite apenas números" name="cpf_cnpj" maxlength="11"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                            value="<?= $usuario->cpf_cnpj ?>" required>
+                        <label for="floatingInputCPF">CPF ou CNPJ</label>
                     </div>
 
                     <hr>
 
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control" id="floatingInputDtNasc" name="dt_nascimento" oninput="validarDataNascimento()"
-                            value="<?= parseISO($usuario->dtNascimento) ?>">
+                            value="<?= parseISO($usuario->dtNascimento) ?>" required>
                         <label for="floatingInputDtNasc">Data Nascimento</label>
                     </div>
 

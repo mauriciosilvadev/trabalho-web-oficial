@@ -15,11 +15,6 @@ require_once 'includes/cabecalho.inc.php';
             <p>
                   <input type="radio" name="pag" value="pix"> Pix
             <p>
-                  <input type="radio" name="pag" value="paypal"> PayPal
-            <p>
-                  <input type="radio" name="pag" value="picpay"> PicPay
-            <p>
-
                   <input type="hidden" value="1" name="opcao">
                   <input type="submit" value="Efetuar Pagamento">
       </form>

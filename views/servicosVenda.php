@@ -68,7 +68,7 @@ if (!$possuiServicoComDatasDisponivel) {
 
       <div class="col">
         <div class="card">
-          <form action="../controllers/controllerCarrinho.php" method="get">
+          <form action="../controllers/controllerCarrinho.php" method="get" id="form-servico-<?= $servico->id ?>" onsubmit="return validarSelecaoDatas(<?= $servico->id ?>)">
             <input type="hidden" name="opcao" value="3">
             <input type="hidden" name="id_servico" value="<?= $servico->id ?>">
             <div class="card-body">
@@ -86,11 +86,11 @@ if (!$possuiServicoComDatasDisponivel) {
                   Selecionar Datas
                 </button>
                 <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                  <?php foreach ($servico->datasDisponiveis as $data) { ?>
+                  <?php foreach ($servico->datasDisponiveis as $index => $data) { ?>
                     <li>
                       <div class="form-check px-3">
-                        <input class="form-check-input" type="checkbox" name="id_datas[]" value="<?= $data->id ?>" id="date1">
-                        <label class="form-check-label" for="date1">
+                        <input class="form-check-input data-checkbox-<?= $servico->id ?>" type="checkbox" name="id_datas[]" value="<?= $data->id ?>" id="date-<?= $servico->id ?>-<?= $index ?>" onchange="verificarSelecaoDatas(<?= $servico->id ?>)">
+                        <label class="form-check-label" for="date-<?= $servico->id ?>-<?= $index ?>">
                           <?= formatarData($data->data) ?>
                         </label>
                       </div>
@@ -99,9 +99,14 @@ if (!$possuiServicoComDatasDisponivel) {
                 </ul>
               </div>
 
+              <!-- Mensagem de validação -->
+              <div id="msg-validacao-<?= $servico->id ?>" class="alert alert-warning mt-2" style="display: none;">
+                <small>Selecione uma data para contratar o serviço</small>
+              </div>
+
               <!-- Botão de ação -->
               <div class="text-end mt-3">
-                <button class="btn btn-danger" type="submit">Contratar</button>
+                <button id="btn-contratar-<?= $servico->id ?>" class="btn btn-danger" type="submit" disabled>Contratar</button>
               </div>
             </div>
           </form>
@@ -115,4 +120,61 @@ if (!$possuiServicoComDatasDisponivel) {
 
 <?php
 }
-require_once "includes/rodape.inc.php"; ?>
+?>
+
+<script>
+function verificarSelecaoDatas(servicoId) {
+  const checkboxes = document.querySelectorAll('.data-checkbox-' + servicoId);
+  const botao = document.getElementById('btn-contratar-' + servicoId);
+  const mensagem = document.getElementById('msg-validacao-' + servicoId);
+  
+  let algumSelecionado = false;
+  
+  checkboxes.forEach(function(checkbox) {
+    if (checkbox.checked) {
+      algumSelecionado = true;
+    }
+  });
+  
+  if (algumSelecionado) {
+    botao.disabled = false;
+    botao.classList.remove('btn-secondary');
+    botao.classList.add('btn-danger');
+    mensagem.style.display = 'none';
+  } else {
+    botao.disabled = true;
+    botao.classList.remove('btn-danger');
+    botao.classList.add('btn-secondary');
+    mensagem.style.display = 'block';
+  }
+}
+
+function validarSelecaoDatas(servicoId) {
+  const checkboxes = document.querySelectorAll('.data-checkbox-' + servicoId);
+  let algumSelecionado = false;
+  
+  checkboxes.forEach(function(checkbox) {
+    if (checkbox.checked) {
+      algumSelecionado = true;
+    }
+  });
+  
+  if (!algumSelecionado) {
+    alert('Por favor, selecione pelo menos uma data para contratar o serviço.');
+    return false;
+  }
+  
+  return true;
+}
+
+// Inicializar estado dos botões quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+  <?php foreach ($servicos as $servico) { 
+    if (sizeof($servico->datasDisponiveis) > 0) { ?>
+      verificarSelecaoDatas(<?= $servico->id ?>);
+    <?php } 
+  } ?>
+});
+</script>
+
+<?php require_once "includes/rodape.inc.php"; ?>
