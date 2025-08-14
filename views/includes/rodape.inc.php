@@ -7,8 +7,7 @@
           Loja Virtual Des Web
         </h5>
         <p class="text-muted mb-3">
-          Sistema completo de gerenciamento de serviços online.
-          Conectando clientes e prestadores de serviços de forma eficiente.
+          Sistema de gerenciamento de serviços
         </p>
         <div class="d-flex">
           <a href="#" class="btn btn-outline-primary btn-sm me-2">
@@ -23,32 +22,10 @@
         </div>
       </div>
 
-      <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-        <h6 class="text-uppercase fw-bold mb-3">Serviços</h6>
-        <ul class="list-unstyled">
-          <li class="mb-2">
-            <a href="#" class="text-muted text-decoration-none">
-              <i class="fas fa-chevron-right me-1 small"></i>
-              Informática
-            </a>
-          </li>
-          <li class="mb-2">
-            <a href="#" class="text-muted text-decoration-none">
-              <i class="fas fa-chevron-right me-1 small"></i>
-              Consultoria
-            </a>
-          </li>
-          <li class="mb-2">
-            <a href="#" class="text-muted text-decoration-none">
-              <i class="fas fa-chevron-right me-1 small"></i>
-              Suporte
-            </a>
-          </li>
-        </ul>
-      </div>
+
 
       <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-        <h6 class="text-uppercase fw-bold mb-3">Contato</h6>
+        <h6 class="text-uppercase fw-bold mb-3 text-muted">Contato</h6>
         <ul class="list-unstyled">
           <li class="mb-2">
             <i class="fas fa-map-marker-alt text-primary me-2"></i>
@@ -66,7 +43,7 @@
       </div>
 
       <div class="col-lg-3 col-md-6">
-        <h6 class="text-uppercase fw-bold mb-3">Horário de Funcionamento</h6>
+        <h6 class="text-uppercase fw-bold mb-3 text-muted">Horário de Funcionamento</h6>
         <ul class="list-unstyled">
           <li class="mb-2">
             <i class="fas fa-clock text-primary me-2"></i>
@@ -96,9 +73,7 @@
       <div class="col-md-6 text-md-end">
         <p class="mb-0 text-muted">
           <i class="fas fa-code me-1"></i>
-          Desenvolvido com
-          <i class="fas fa-heart text-danger mx-1"></i>
-          e Bootstrap
+          Desenvolvido por Rayssa, Mariana, Artur e Maurício
         </p>
       </div>
     </div>

@@ -7,9 +7,9 @@ include_once 'includes/cabecalho.inc.php';
 
 // Verificar se os serviços estão carregados na sessão
 if (!isset($_SESSION["servicos"]) || empty($_SESSION["servicos"])) {
-    // Redirecionar para carregar os serviços
-    header("Location: ../controllers/controllerServico.php?opcao=6&opcao_redirecionamento=1");
-    exit();
+  // Redirecionar para carregar os serviços
+  header("Location: ../controllers/controllerServico.php?opcao=6&opcao_redirecionamento=1");
+  exit();
 }
 
 $servicos = $_SESSION["servicos"];
@@ -152,7 +152,6 @@ $tamanhoMaxNome = 50;
 
                 <div class="text-center mb-3">
                   <h4 class="text-success fw-bold">
-                    <i class="fas fa-dollar-sign me-1"></i>
                     R$ <?= number_format($servico->valor, 2, ',', '.') ?>
                   </h4>
                 </div>

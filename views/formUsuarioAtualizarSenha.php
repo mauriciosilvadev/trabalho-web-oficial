@@ -1,7 +1,7 @@
 <?php require_once "includes/cabecalho.inc.php" ?>
 
 <div class="container-fluid px-3">
-    <div class="row min-vh-100">
+    <div class="row min-vh-100 justify-content-center">
         <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
             <div class="w-100 py-5 px-md-5 px-xl-6 position-relative">
                 <div class="card shadow-lg border-0">

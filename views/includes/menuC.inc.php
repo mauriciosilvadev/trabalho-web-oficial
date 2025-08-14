@@ -6,7 +6,6 @@ $usuario = $_SESSION["usuario"];
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
   <div class="container">
     <a href="index.php" class="navbar-brand d-flex align-items-center">
-      <img src="imagens/logo2.png" alt="Logo" class="me-2" style="height: 40px;">
       <span class="fw-bold text-primary">Loja Serviços</span>
     </a>
 
@@ -35,7 +34,7 @@ $usuario = $_SESSION["usuario"];
           <i class="fas fa-shopping-cart"></i>
           <span class="visually-hidden">Carrinho</span>
         </a>
-        
+
         <div class="dropdown me-3">
           <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fas fa-user me-1"></i>
@@ -54,7 +53,9 @@ $usuario = $_SESSION["usuario"];
                 Alterar Senha
               </a>
             </li>
-            <li><hr class="dropdown-divider"></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
             <li>
               <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
                 <i class="fas fa-sign-out-alt me-2"></i>
@@ -63,7 +64,7 @@ $usuario = $_SESSION["usuario"];
             </li>
           </ul>
         </div>
-        
+
         <?php include_once "modal.inc.php"; ?>
       </div>
     </div>

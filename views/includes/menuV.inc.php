@@ -2,7 +2,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
   <div class="container">
     <a href="index.php" class="navbar-brand d-flex align-items-center">
-      <img src="imagens/logo2.png" alt="Logo" class="me-2" style="height: 40px;">
       <span class="fw-bold text-primary">Loja Serviços</span>
     </a>
 
@@ -31,12 +30,12 @@
           <i class="fas fa-shopping-cart"></i>
           <span class="visually-hidden">Carrinho</span>
         </a>
-        
+
         <a class="btn btn-primary me-2" href="formUsuarioLogin.php">
           <i class="fas fa-sign-in-alt me-1"></i>
           Login
         </a>
-        
+
         <a class="btn btn-outline-primary" href="formUsuario.php">
           <i class="fas fa-user-plus me-1"></i>
           Cadastrar-se
