@@ -52,7 +52,7 @@ if (sizeof($carrinho) == 0) {
                         <tr class="align-middle text-center">
                             <th width="8%">
                                 <i class="fas fa-hashtag"></i>
-                                Nº
+                                ID
                             </th>
                             <th>
                                 <i class="fas fa-info-circle me-1"></i>

@@ -16,17 +16,25 @@
                         <form action="../controllers/controllerUsuario.php" method="get">
 
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" minlength="4"
-                                    maxlength="8" placeholder="Senha" name="senha" oninput="validarSenha()" required>
+                                <input type="password" class="form-control" id="floatingPassword" minlength="8"
+                                    placeholder="Senha" name="senha"
+                                    title="A senha deve conter no mínimo 8 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial"
+                                    oninput="validarSenha()" required>
                                 <label for="floatingPassword">
                                     <i class="fas fa-lock me-2"></i>Nova Senha
                                 </label>
                             </div>
 
+                            <div id="erroSenhaForca" class="alert alert-warning alert-dismissible fade show" role="alert" style="display: none;">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                A senha deve conter no mínimo 8 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial (!@#$%^&*)
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+
                             <hr>
 
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingCPassword" minlength="4" maxlength="8"
+                                <input type="password" class="form-control" id="floatingCPassword" minlength="8"
                                     placeholder="Confirmar Senha" name="confirmar_senha" oninput="validarSenha()" required>
                                 <label for="floatingCPassword">
                                     <i class="fas fa-lock me-2"></i>Confirmar Senha
