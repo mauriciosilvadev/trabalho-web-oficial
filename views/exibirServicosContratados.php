@@ -38,7 +38,7 @@ if (sizeof($vendas) == 0) {
                         <tr class="align-middle text-center">
                             <th class="fw-bold">
                                 <i class="fas fa-hashtag me-1"></i>
-                                Nº
+                                ID
                             </th>
                             <th class="fw-bold">
                                 <i class="fas fa-tag me-1"></i>
