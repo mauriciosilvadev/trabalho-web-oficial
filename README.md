@@ -18,9 +18,9 @@ Sistema web para gerenciamento de serviços desenvolvido em PHP com arquitetura 
 
 | Tipo      | Email                     | Senha |
 | --------- | ------------------------- | ----- |
-| Admin     | admin@email               | 1234  |
-| Prestador | carlos.silva@techmail.com | 12345 |
-| Cliente   | ana.santos@designmail.com | 12345 |
+| Admin     | admin@email.com           | 1234  |
+| Prestador | carlos.silva@techmail.com | 1234  |
+| Cliente   | ana.santos@designmail.com | 1234  |
 
 ---
 
