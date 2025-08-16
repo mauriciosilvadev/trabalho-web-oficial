@@ -167,8 +167,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nome`, `endereco`, `cidade`, `telefone`, `cpf_cnpj`, `dt_nascimento`, `email`, `senha`, `tipo`, `esta_deletado`, `email_deletado`, `cpf_cnpj_deletado`) VALUES
 (4, 'Admin', '', 'Vitória', '', '', '2024-09-11', 'admin@email', '1234', 'A', 0, NULL, NULL),
-(5, 'Carlos Eduardo Silva', 'Rua das Palmeiras, 150, Jardins', 'Vitória', '27 99887-7654', '123.456.789-01', '1988-03-15', 'carlos.silva@techmail.com', '12345', 'P', 0, NULL, NULL),
-(6, 'Ana Paula Santos', 'Avenida Beira Mar, 890', 'Vitória', '27 98765-4321', '987.654.321-09', '1995-07-22', 'ana.santos@designmail.com', '12345', 'C', 0, NULL, NULL),
+(5, 'Carlos Eduardo Silva', 'Rua das Palmeiras, 150, Jardins', 'Vitória', '27 99887-7654', '123.456.789-01', '1988-03-15', 'carlos.silva@techmail.com', '1234', 'P', 0, NULL, NULL),
+(6, 'Ana Paula Santos', 'Avenida Beira Mar, 890', 'Vitória', '27 98765-4321', '987.654.321-09', '1995-07-22', 'ana.santos@designmail.com', '1234', 'C', 0, NULL, NULL),
 (7, 'Marina Costa Oliveira', 'Rua do Comércio, 45', 'Vitória', '27 99123-4567', '456.789.123-45', '1992-11-08', 'marina.oliveira@clientemail.com', '1234', 'C', 0, NULL, NULL),
 (8, 'Rafael Mendes Pereira', 'Avenida Central, 320', 'Vitória', '27 98456-7890', '789.123.456-78', '1990-01-30', 'rafael.pereira@techsupport.com', '1234', 'P', 0, NULL, NULL);
 
